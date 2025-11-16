@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-LOG_FILE="/var/log/ta-env-install.log"
+LOG_FILE="/var/log/snortEnv.log"
 
 echo "=== SNORT ENV INSTALLER ==="
 echo
@@ -10,7 +10,7 @@ echo
 # CEK WAJIB ROOT
 ##############################
 if [ "$(id -u)" -ne 0 ]; then
-  echo "Please run this script as root (sudo ./install-ta-env.sh)"
+  echo "Please run this script as root (sudo ./snortEnv.sh)"
   exit 1
 fi
 
@@ -54,50 +54,53 @@ echo "SSH Service Status : $SSH_STATUS"
 VM_IP=$(hostname -I | awk '{print $1}')
 [ -z "$VM_IP" ] && VM_IP="(tidak terdeteksi)"
 
-echo "VM IP Address      : $VM_IP"
-echo "SSH Login Command  : ssh <username>@$VM_IP"
-
 ##############################
 # INSTAL DVWA
 ##############################
 echo "=== [2/5] Installing DVWA (Apache + PHP + MariaDB) ==="
 
+# Install Apache + PHP + MariaDB untuk DVWA
 apt-get install -y \
   apache2 \
   mariadb-server \
+  mariadb-client \
   php \
-  php-cli=\
-  php-mysqli \
+  php-cli \
+  php-mysql \
   php-gd \
   php-xml \
   php-curl \
   php-zip \
-  libapache2-mod-php >>"$LOG_FILE" 2>&1
+  libapache2-mod-php \
+  git >>"$LOG_FILE" 2>&1
 
-# Enable Apache at boot
-systemctl enable apache2 >>"$LOG_FILE" 2>&1
-systemctl start apache2  >>"$LOG_FILE" 2>&1
+# Enable & start Apache + MariaDB
+systemctl enable apache2 mariadb >>"$LOG_FILE" 2>&1 || true
+systemctl start apache2 mariadb  >>"$LOG_FILE" 2>&1 || true
 
-# Download DVWA
+# Aktifkan mod PHP & rewrite (buat beberapa fitur DVWA)
+a2enmod php* rewrite >>"$LOG_FILE" 2>&1 || true
+systemctl restart apache2 >>"$LOG_FILE" 2>&1
+
+# Clone DVWA ke /var/www/html/dvwa
 if [ ! -d /var/www/html/dvwa ]; then
   echo "  -> Cloning DVWA..."
-  git clone https://github.com/digininja/DVWA.git /var/www/html/dvwa >>"$LOG_FILE" 2>&1
+  git clone --depth=1 https://github.com/digininja/DVWA.git /var/www/html/dvwa >>"$LOG_FILE" 2>&1
 else
   echo "  -> DVWA folder already exists, skip clone."
 fi
 
 cd /var/www/html/dvwa
 
-# Copy default config
+# Copy default config kalau belum ada
 if [ ! -f config/config.inc.php ]; then
   cp config/config.inc.php.dist config/config.inc.php
 fi
 
-# Setup database DVWA
 echo "  -> Configuring MariaDB for DVWA..."
 DB_NAME="dvwa"
 DB_USER="dvwa"
-DB_PASS="dvwa123!"
+DB_PASS="p@ssw0rd"   # <- password default DVWA
 
 mysql -u root >>"$LOG_FILE" 2>&1 <<EOF
 CREATE DATABASE IF NOT EXISTS ${DB_NAME};
@@ -106,27 +109,25 @@ GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'localhost';
 FLUSH PRIVILEGES;
 EOF
 
-# Sesuaikan config.inc.php
-sed -i "s/\['db_user'\] = '.*';/\['db_user'\] = '${DB_USER}';/" config/config.inc.php
-sed -i "s/\['db_password'\] = '.*';/\['db_password'\] = '${DB_PASS}';/" config/config.inc.php
-sed -i "s/\['db_database'\] = '.*';/\['db_database'\] = '${DB_NAME}';/" config/config.inc.php
-
-# Permission
+echo "  -> Setting DVWA permissions..."
 chown -R www-data:www-data /var/www/html/dvwa
 chmod -R 755 /var/www/html/dvwa
+# folder upload harus writable
+chmod 777 /var/www/html/dvwa/hackable/uploads || true
 
-# Beberapa pengaturan PHP untuk DVWA (opsional tapi membantu)
+echo "  -> Configuring PHP for DVWA..."
 PHP_VERSION=$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;' 2>/dev/null || echo "8.1")
 PHPINI="/etc/php/$PHP_VERSION/apache2/php.ini"
 if [ -f "$PHPINI" ]; then
-  sed -i "s/allow_url_include = Off/allow_url_include = On/" "$PHPINI" || true
-  sed -i "s/allow_url_fopen = Off/allow_url_fopen = On/" "$PHPINI" || true
+  sed -i 's/^\s*allow_url_include\s*=.*/allow_url_include = On/' "$PHPINI" || true
+  sed -i 's/^\s*allow_url_fopen\s*=.*/allow_url_fopen = On/' "$PHPINI" || true
+  sed -i 's/^\s*display_errors\s*=.*/display_errors = On/' "$PHPINI" || true
+  sed -i 's/^\s*display_startup_errors\s*=.*/display_startup_errors = On/' "$PHPINI" || true
 fi
 
 systemctl restart apache2 >>"$LOG_FILE" 2>&1
 
-echo "  -> DVWA installed. Access: http://$VM_IP/dvwa"
-echo "     (Setelah login, masuk menu Setup dan klik 'Create / Reset Database')"
+echo "  -> DVWA installed."
 
 ##############################
 # INSTAL SNORT3 + LIBDAQ + LIBML + EXTRA
@@ -285,8 +286,8 @@ echo
 echo "DVWA:"
 echo "  URL      : http://$VM_IP/dvwa"
 echo "  DB user  : dvwa"
-echo "  DB pass  : dvwa123!"
-echo "  Note     : Setelah login, buka Setup → klik 'Create / Reset Database'"
+echo "  DB pass  : p@ssw0rd"
+echo "  Web login: admin / password"
 echo
 echo "Snort3:"
 echo "  Binary   : /usr/local/bin/snort"
