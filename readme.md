@@ -1,8 +1,3 @@
-```bash
-chmod +x install-ta-env.sh
-sudo ./install-ta-env.sh
-```
-
 spesifikasi 
 os:
 ubuntu server 22.04.5 LTS
@@ -14,3 +9,10 @@ df -h
 
 cara cek memory
 free -h
+
+ubah dulu ke Network mode bridge
+
+```bash
+chmod +x snortEnv.sh
+sudo ./snortEnv.sh
+```

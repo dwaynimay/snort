@@ -21,7 +21,6 @@ export TZ=UTC
 ##############################
 # UPDATE DAN INSTALL DEPENDENSI GLOBAL
 ##############################
-echo
 echo "=== [1/5] Updating system and installing base packages ==="
 apt-get update >>"$LOG_FILE" 2>&1
 apt-get upgrade -y >>"$LOG_FILE" 2>&1
@@ -44,7 +43,6 @@ apt-get install --no-install-recommends -y \
 ########################################
 # SSH STATUS + TAMPILKAN IP VM
 ########################################
-echo
 echo "=== [INFO] SSH STATUS ==="
 systemctl enable ssh >/dev/null 2>&1 || true
 systemctl start ssh  >/dev/null 2>&1 || true
@@ -62,13 +60,13 @@ echo "SSH Login Command  : ssh <username>@$VM_IP"
 ##############################
 # INSTAL DVWA
 ##############################
-echo
 echo "=== [2/5] Installing DVWA (Apache + PHP + MariaDB) ==="
 
 apt-get install -y \
   apache2 \
   mariadb-server \
   php \
+  php-cli=\
   php-mysqli \
   php-gd \
   php-xml \
@@ -118,7 +116,8 @@ chown -R www-data:www-data /var/www/html/dvwa
 chmod -R 755 /var/www/html/dvwa
 
 # Beberapa pengaturan PHP untuk DVWA (opsional tapi membantu)
-PHPINI="/etc/php/$(php -r 'echo PHP_MAJOR_VERSION.\".\".PHP_MINOR_VERSION;')/apache2/php.ini"
+PHP_VERSION=$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;' 2>/dev/null || echo "8.1")
+PHPINI="/etc/php/$PHP_VERSION/apache2/php.ini"
 if [ -f "$PHPINI" ]; then
   sed -i "s/allow_url_include = Off/allow_url_include = On/" "$PHPINI" || true
   sed -i "s/allow_url_fopen = Off/allow_url_fopen = On/" "$PHPINI" || true
@@ -132,7 +131,6 @@ echo "     (Setelah login, masuk menu Setup dan klik 'Create / Reset Database')"
 ##############################
 # INSTAL SNORT3 + LIBDAQ + LIBML + EXTRA
 ##############################
-echo
 echo "=== [3/5] Installing Snort3 and dependencies ==="
 
 apt-get install --no-install-recommends -y \
@@ -241,7 +239,6 @@ echo "  -> Snort3 install done. Binary: /usr/local/bin/snort"
 ##############################
 # OPTIONAL: SERVICE SYSTEMD SNORT
 ##############################
-echo
 echo "=== [4/5] Creating systemd service for Snort3 (interface: enp0s3) ==="
 
 cat >/etc/systemd/system/snort.service <<EOF
@@ -266,7 +263,6 @@ systemctl enable snort >>"$LOG_FILE" 2>&1 || true
 ##############################
 # INSTAL WAZUH (ALL-IN-ONE)
 ##############################
-echo
 echo "=== [5/5] Installing Wazuh all-in-one (manager + indexer + dashboard) ==="
 cd /tmp
 curl -sO https://packages.wazuh.com/4.8/wazuh-install.sh >>"$LOG_FILE" 2>&1
