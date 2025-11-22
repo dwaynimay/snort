@@ -222,3 +222,8 @@ pip install numpy tensorflow
 ```bash
 snort -c /usr/local/snort/etc/snort/snort.lua --talos --lua 'snort_ml_engine = { http_param_model = "classifier.model" }; snort_ml = {}; trace = { modules = { snort_ml = {all =1 } } };' -r sql_injection.pcap.pcap
 ```
+
+### Referensi
+* [Dokumentasi Resmi SnortML](https://docs.snort.org/misc/snort_ml)
+* [Snort3 GitHub Repository](https://github.com/snort3/snort3)
+* [Wazuh Documentation](https://documentation.wazuh.com/)
