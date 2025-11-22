@@ -15,6 +15,7 @@ NC='\033[0m'
 
 # --- Paths ---
 LOG_FILE="/var/log/snortEnv.log"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SNORT_DIR="/usr/local/etc/snort"
 SNORT_LOG_DIR="/var/log/snort"
 SNORT_RULES_DIR="$SNORT_DIR/rules"
@@ -22,7 +23,7 @@ SNORT_RULES_FILE="$SNORT_RULES_DIR/rules.local"
 SNORT_LUA="$SNORT_DIR/snort.lua"
 SNORT_ML_DIR="$SNORT_DIR/ml"
 WAZUH_CONFIG="/var/ossec/etc/ossec.conf"
-PCAPGEN_FILE="sqlpcap.py"
+PCAPGEN_FILE="$SCRIPT_DIR/sqlpcap.py"
 PCAPGEN_CP_DIR="/usr/local/src/libml/examples/classifier"
 
 # --- System Info ---
@@ -252,6 +253,7 @@ success "Snort 3 installed and services started."
 # copy pcapgen
 cp "$PCAPGEN_FILE" "$PCAPGEN_CP_DIR"
 chmod +x "$PCAPGEN_CP_DIR/$PCAPGEN_FILE"
+
 # Instal Wazuh
 info "[4/5] Installing Wazuh (All-in-One)..."
 cd /tmp
