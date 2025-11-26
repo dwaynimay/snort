@@ -21,10 +21,16 @@ SNORT_LOG_DIR="/var/log/snort"
 SNORT_RULES_DIR="$SNORT_DIR/rules"
 SNORT_RULES_FILE="$SNORT_RULES_DIR/rules.local"
 SNORT_LUA="$SNORT_DIR/snort.lua"
-SNORT_ML_DIR="$SNORT_DIR/ml"
+SNORT_ML_DIR="$SNORT_DIR/models"
+SRC_PCAPGEN="$SCRIPT_DIR/tools/pcap_gen/sqlpcap.py"
+SRC_DASHBOARD_APP="$SCRIPT_DIR/dashboard/app.py"
+SRC_DASHBOARD_HTML="$SCRIPT_DIR/dashboard/templates/index.html"
+DEST_PCAPGEN_DIR="/usr/local/src/libml/examples/classifier"
+DEST_DASHBOARD_DIR="/usr/local/src/snort_dashboard"
+DEST_TEMPLATE_DIR="$DEST_DASHBOARD_DIR/templates"
 WAZUH_CONFIG="/var/ossec/etc/ossec.conf"
-PCAPGEN_FILE="$SCRIPT_DIR/sqlpcap.py"
-PCAPGEN_CP_DIR="/usr/local/src/libml/examples/classifier"
+WAZUH_CONFIG_DECODER="/var/ossec/etc/decoders/local_decoder.xml"
+WAZUH_CONFIG_RULES="/var/ossec/etc/rules/local_rules.xml"
 
 # --- System Info ---
 ACTIVE_IFACE=$(ip route get 1 | awk '{print $5; exit}') || ACTIVE_IFACE="enp0s3"
@@ -95,21 +101,31 @@ apt-get update >>"$LOG_FILE" 2>&1
 apt-get upgrade -y >>"$LOG_FILE" 2>&1
 
 PACKAGES=(
-    # deependensi global
-    ca-certificates curl wget git nano vim net-tools iproute2 
-    iputils-ping rsyslog sudo tzdata ethtool openssh-server
-    # dependensi snort
-    asciidoc autoconf automake bison build-essential checkinstall 
-    cmake cpputest dblatex flex g++ gawk gdb jq libcpputest-dev 
-    libdnet-dev libdumbnet-dev libfl-dev libflatbuffers-dev 
-    libgoogle-perftools-dev libhwloc-dev libhyperscan-dev 
-    libjemalloc-dev libluajit-5.1-dev liblzma-dev libmnl-dev 
-    libnetfilter-queue-dev libnghttp2-dev libpcap-dev libpcre2-dev 
-    libsafec-dev libsqlite3-dev libssl-dev libtirpc-dev libtool 
-    libunwind-dev make netcat-openbsd pkg-config python3 
-    python3-pip python3-venv tcpdump uuid-dev w3m zlib1g-dev
-)
+    # dependensi global
+    ca-certificates curl wget git nano vim net-tools iproute2 gdb jq
+    iputils-ping rsyslog sudo tzdata ethtool openssh-server tcpdump netcat-openbsd
+    python3 python3-pip python3-venv tcpreplay python3-scapy
 
+    # dependensi dashboard custom
+    python3-flask
+
+    # === 3. DEPENDENSI SNORT 3 ===
+    # a. Build Tools & Compiler
+    build-essential g++ make cmake automake autoconf libtool pkg-config 
+    flex bison gawk libfl-dev
+
+    # b. Core Libraries & Protocols
+    libpcap-dev libpcre2-dev libdnet-dev libdumbnet-dev libluajit-5.1-dev 
+    libssl-dev zlib1g-dev uuid-dev libnghttp2-dev libsqlite3-dev 
+    libtirpc-dev libunwind-dev
+
+    # c. Performance & Advanced Libraries
+    libhyperscan-dev libhwloc-dev libgoogle-perftools-dev libjemalloc-dev
+    liblzma-dev libflatbuffers-dev libmnl-dev libnetfilter-queue-dev
+
+    # d. Documentation & Testing
+    asciidoc checkinstall cpputest libcpputest-dev dblatex libsafec-dev w3m
+)
 apt-get install --no-install-recommends -y "${PACKAGES[@]}" >>"$LOG_FILE" 2>&1
 
 # Konfigurasi SSH
@@ -159,15 +175,6 @@ success "DVWA installed and configured."
 # Install Snort3
 info "[3/5] Installing Snort 3 and Libraries..."
 
-# # buat user agar tidak root
-# user snorty
-# if ! id -u snorty >/dev/null 2>&1; then
-#   echo "  -> Creating user snorty:oink"
-#   useradd -m -s /bin/bash snorty
-#   echo "snorty:oink" | chpasswd
-#   usermod -aG sudo snorty
-# fi
-
 install_component() {
     local name=$1
     local repo=$2
@@ -187,13 +194,13 @@ install_component "libml" "https://github.com/snort3/libml.git" "./configure.sh 
 mkdir -p /usr/local/src/libml
 cp -r /tmp/libml/examples /usr/local/src/libml/ >>"$LOG_FILE" 2>&1
 # Snort3
-install_component "snort3" "https://github.com/snort3/snort3.git" "./configure_cmake.sh --prefix=/usr/local --enable-debug-msgs && cd build && make -j$(nproc) && make install && ldconfig"
+install_component "snort3" "https://github.com/snort3/snort3.git" "./configure_cmake.sh --prefix=/usr/local --enable-debug-msgs --enable-tcmalloc --enable-jemalloc && cd build && make -j$(nproc) && make install && ldconfig"
 # Extra
 install_component "snort3_extra" "https://github.com/snort3/snort3_extra.git" "./configure_cmake.sh --prefix=/usr/local && cd build && make -j$(nproc) && make install && ldconfig"
 
 info "Configuring Snort 3..."
-mkdir -p "$SNORT_RULES_DIR" "$SNORT_LOG_DIR" "$SNORT_ML_DIR"
-chmod 777 "$SNORT_RULES_DIR" "$SNORT_LOG_DIR" "$SNORT_ML_DIR"
+mkdir -p "$SNORT_RULES_DIR" "$SNORT_LOG_DIR" "$SNORT_ML_DIR" "$DEST_PCAPGEN_DIR" "$DEST_TEMPLATE_DIR"
+chmod 777 "$SNORT_RULES_DIR" "$SNORT_LOG_DIR" "$SNORT_ML_DIR" "$DEST_PCAPGEN_DIR" "$DEST_TEMPLATE_DIR"
 
 [ ! -f "$SNORT_RULES_FILE" ] && touch "$SNORT_RULES_FILE" && chmod 666 "$SNORT_RULES_FILE"
 [ ! -f "$SNORT_LOG_DIR/alert_fast.txt" ] && touch "$SNORT_LOG_DIR/alert_fast.txt" && chmod 666 "$SNORT_LOG_DIR/alert_fast.txt"
@@ -209,9 +216,27 @@ sed -i "/enable_builtin_rules = true,/a \\
 
 sed -i 's/--alert_fast = { }/alert_fast = { file = true, limit = 100 },/' "$SNORT_LUA"
 
+# copy pcapgen
+# --- 3. Copy & Config PCAP Generator ---
+if [ -f "$SRC_PCAPGEN" ]; then
+    info " -> Copying Attack Tool (sqlpcap.py)..."
+    cp "$SRC_PCAPGEN" "$DEST_PCAPGEN_DIR/sqlpcap.py"
+    chmod +x "$DEST_PCAPGEN_DIR/sqlpcap.py"
+else
+    echo -e "${RED}[WARN] File $SRC_PCAPGEN tidak ditemukan. Skip copy.${NC}"
+fi
+
+# --- 4. Copy Dashboard Files ---
+if [ -f "$SRC_DASHBOARD_APP" ] && [ -f "$SRC_DASHBOARD_HTML" ]; then
+    info " -> Copying Dashboard App & Templates..."
+    cp "$SRC_DASHBOARD_APP" "$DEST_DASHBOARD_DIR/app.py"
+    cp "$SRC_DASHBOARD_HTML" "$DEST_TEMPLATE_DIR/index.html"
+else
+    echo -e "${RED}[WARN] File Dashboard (app.py/index.html) tidak lengkap di folder source.${NC}"
+fi
+
 # Services
 info "Creating Systemd Services..."
-
 # NIC Service
 cat > /etc/systemd/system/snort3-nic.service <<EOF
 [Unit]
@@ -228,7 +253,6 @@ RemainAfterExit=yes
 [Install]
 WantedBy=default.target
 EOF
-
 # Snort Service
 cat >/etc/systemd/system/snort.service <<EOF
 [Unit]
@@ -237,22 +261,33 @@ After=network.target snort3-nic.service
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/snort -c $SNORT_LUA -s 65535 -k none -i $ACTIVE_IFACE -A alert_fast -l $SNORT_LOG_DIR -R $SNORT_DIR/rules -Q --daq afpacket
+ExecStart=/usr/local/bin/snort -c $SNORT_LUA -s 65535 -k none -i $ACTIVE_IFACE -A alert_fast -l $SNORT_LOG_DIR -R $SNORT_RULES_DIR -Q --daq afpacket
 ExecReload=/bin/kill -HUP \$MAINPID
 Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
 EOF
+# custom dashboard
+cat > /etc/systemd/system/snort-dashboard.service <<EOF
+[Unit]
+Description=Snort ML Web Dashboard
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=$DEST_DASHBOARD_DIR
+ExecStart=/usr/bin/python3 app.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
 
 systemctl daemon-reload >>"$LOG_FILE" 2>&1
-systemctl enable snort3-nic.service snort.service >>"$LOG_FILE" 2>&1
-systemctl start snort3-nic.service snort.service >>"$LOG_FILE" 2>&1
+systemctl enable snort3-nic.service snort.service snort-dashboard.service >>"$LOG_FILE" 2>&1
+systemctl start snort3-nic.service snort.service snort-dashboard.service >>"$LOG_FILE" 2>&1
 success "Snort 3 installed and services started."
-
-# copy pcapgen
-cp "$PCAPGEN_FILE" "$PCAPGEN_CP_DIR"
-chmod +x "$PCAPGEN_CP_DIR/$PCAPGEN_FILE"
 
 # Instal Wazuh
 info "[4/5] Installing Wazuh (All-in-One)..."
@@ -269,16 +304,51 @@ if [ -f "$WAZUH_CONFIG" ]; then
     <log_format>snort-fast</log_format>\
     <location>'"$SNORT_LOG_DIR/alert_fast.txt"'</location>\
   </localfile>' "$WAZUH_CONFIG"
-        systemctl restart wazuh-manager
-        success "Wazuh linked to Snort logs."
     else
         info "Wazuh config already present."
     fi
 else
     error "Wazuh config file not found!"
 fi
+if [ -f "$WAZUH_CONFIG_DECODER" ]; then
+    cp "$WAZUH_CONFIG_DECODER" "${WAZUH_CONFIG_DECODER}.bak"
+    sed -i '$a \
+    \
+    <decoder name="snort_ml_decoder">\
+        <prematch>snort_ml</prematch>\
+        <regex>^(\d{4}) Snort alert: (\w+) - (.*)$</regex>\
+        <order>year,program,alert_message</order>\
+    </decoder>' "$WAZUH_CONFIG_DECODER"
+else
+    error "Wazuh encoder file not found!"
+fi
 
-# --- 5. REPORT ---
+if [ -f "$WAZUH_CONFIG_RULES" ]; then
+    cp "$WAZUH_CONFIG_RULES" "${WAZUH_CONFIG_RULES}.bak"
+    sed -i '$a \
+    \
+    <group name="snort_ml,ids,">\
+    <rule id="100100" level="7">\
+        <decoded_as>snort_ml_decoder</decoded_as>\
+        <match>snort_ml</match>\
+        <description>SnortML Detection: Potential threat detected</description>\
+        <group>ml_alert,ids,</group>\
+    </rule>\
+    \
+    <rule id="100101" level="10">\
+        <if_sid>100100</if_sid>\
+        <match>Neural Network Based Exploit Detection</match>\
+        <description>SnortML Detection: ML Exploit Detection</description>\
+        <group>ml_high_confidence,</group>\
+    </rule>\
+    </group>' "$WAZUH_CONFIG_RULES"
+else
+    error "Wazuh rules file not found!"
+fi
+systemctl restart wazuh-manager
+success "Wazuh linked to Snort logs."
+
+# REPORT
 echo -e "${YELLOW}========================================${NC}"
 echo -e "${GREEN}      CAPSTONE INSTALLATION REPORT      ${NC}"
 echo -e "${YELLOW}========================================${NC}"

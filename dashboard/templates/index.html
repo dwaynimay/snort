@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnortML Controller</title>
+    <style>
+        /* Dark Mode */
+        body { background-color: #0d1117; color: #c9d1d9; font-family: 'Consolas', 'Courier New', monospace; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+
+        /* Header */
+        h1 { text-align: center; border-bottom: 2px solid #238636; padding-bottom: 15px; color: #238636; }
+
+        /* Card Box */
+        .card { background: #161b22; padding: 25px; margin-bottom: 20px; border: 1px solid #30363d; border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .card h3 { margin-top: 0; color: #58a6ff; }
+
+        /* Grid Tombol */
+        .button-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px; }
+
+        /* Gaya Tombol */
+        .btn {
+            background: #21262d; color: #c9d1d9;
+            border: 1px solid #30363d; border-radius: 6px;
+            padding: 15px; cursor: pointer; font-size: 14px; font-family: inherit;
+            transition: all 0.2s ease; text-align: left;
+        }
+        .btn:hover { background: #238636; color: #fff; border-color: #238636; transform: translateY(-2px); }
+        .btn:active { transform: translateY(0); }
+        .btn:disabled { border-color: #484f58; color: #484f58; background: #161b22; cursor: not-allowed; transform: none; }
+
+        .btn strong { display: block; font-size: 16px; margin-bottom: 5px; }
+        .btn span { font-size: 12px; color: #8b949e; }
+        .btn:hover span { color: #e6e6e6; }
+
+        /* Terminal Output */
+        #output-box {
+            width: 100%; height: 450px;
+            background: #0d1117; color: #c9d1d9;
+            border: 1px solid #30363d; border-radius: 6px;
+            padding: 15px; box-sizing: border-box;
+            overflow-y: scroll; white-space: pre-wrap; font-size: 13px;
+        }
+
+        /* Scrollbar Keren */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0d1117; }
+        ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #58a6ff; }
+
+        .loading { color: #e3b341; font-weight: bold; }
+        .success { color: #238636; font-weight: bold; }
+        .error { color: #f85149; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>SNORT ML <span style="color:#fff">DASHBOARD</span></h1>
+
+    <div class="card">
+        <h3>1. Pilih Model Klasifikasi</h3>
+        <p>Klik tombol di bawah ini untuk menjalankan Snort dengan model Machine Learning dan Threshold tertentu.</p>
+
+        <div class="button-grid">
+            <button class="btn" onclick="runSnort('cicids_mlp')">
+                <strong>CICIDS MLP Float32</strong>
+                <span>Threshold: 0.95 | Type: .tflite</span>
+            </button>
+
+            <button class="btn" onclick="runSnort('model_sensitif')">
+                <strong>Experimental Model</strong>
+                <span>Threshold: 0.80 | High Sensitivity</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>2. Terminal Output (Live Logs)</h3>
+        <div id="output-box">// Menunggu perintah eksekusi...</div>
+    </div>
+</div>
+
+<script>
+    async function runSnort(modelId) {
+        const outputBox = document.getElementById('output-box');
+        const buttons = document.querySelectorAll('.btn');
+
+        // 1. Tampilan Loading
+        outputBox.innerHTML = '<span class="loading">root@snort:~# Executing Snort with model: ' + modelId + '...\n[ Please wait, analyzing PCAP... ]</span>';
+
+        // Matikan semua tombol agar tidak spam klik
+        buttons.forEach(btn => btn.disabled = true);
+
+        try {
+            // 2. Kirim Request ke Python Backend
+            const response = await fetch('/run_snort', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ model_id: modelId })
+            });
+
+            const result = await response.json();
+
+            // 3. Tampilkan Hasil
+            if (result.status === 'success') {
+                outputBox.innerHTML = '<span class="success">[SUCCESS] Snort process finished.</span>\n\n' + result.output;
+            } else {
+                outputBox.innerHTML = '<span class="error">[ERROR] Snort process failed/timeout.</span>\n\n' + result.output;
+            }
+
+        } catch (error) {
+            outputBox.innerHTML = '<span class="error">[CONNECTION ERROR] Backend tidak merespon.\n' + error + '</span>';
+        } finally {
+            // Hidupkan tombol lagi
+            buttons.forEach(btn => btn.disabled = false);
+        }
+    }
+</script>
+
+</body>
+</html>

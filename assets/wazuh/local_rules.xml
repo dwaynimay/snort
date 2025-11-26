@@ -1,0 +1,19 @@
+lokasi rules wazuh untuk snort: /var/ossec/ruleset/rules/0240-ids_rules.xml
+lokasi local_rules: /var/ossec/etc/rules/local_rules.xml
+perlu ada settingan tambahan di local_rules di bawah sendiri
+
+<group name="snort_ml,ids,">
+  <rule id="100100" level="7">
+    <decoded_as>snort_ml_decoder</decoded_as>
+    <match>snort_ml</match>
+    <description>Snort ML Detection: Potential threat detected by ML-enhanced Snort</description>
+    <group>ml_alert,ids,</group>
+  </rule>
+
+  <rule id="100101" level="10">
+    <if_sid>100100</if_sid>
+    <match>Neural Network Based Exploit Detection</match>
+    <description>High Confidence: ML Neural Network Exploit Detection</description>
+    <group>ml_high_confidence,</group>
+  </rule>
+</group>

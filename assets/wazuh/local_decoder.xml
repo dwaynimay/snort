@@ -1,0 +1,8 @@
+lokasi local_decoder: /var/ossec/etc/decoders/local_decoder.xml
+perlu ada tambahan ini di dalam local_decoder di bawah sendiri
+
+  <decoder name="snort_ml_decoder">
+    <prematch>snort_ml</prematch>
+    <regex>^(\d{4}) Snort alert: (\w+) - (.*)$</regex>
+    <order>year,program,alert_message</order>
+  </decoder>
