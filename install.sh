@@ -194,9 +194,9 @@ install_component "libml" "https://github.com/snort3/libml.git" "./configure.sh 
 mkdir -p /usr/local/src/libml
 cp -r /tmp/libml/examples /usr/local/src/libml/ >>"$LOG_FILE" 2>&1
 # Snort3
-install_component "snort3" "https://github.com/snort3/snort3.git" "./configure_cmake.sh --prefix=/usr/local --enable-debug-msgs --enable-tcmalloc --enable-jemalloc && cd build && make -j$(nproc) && make install && ldconfig"
+install_component "snort3" "https://github.com/snort3/snort3.git" "./configure_cmake.sh --prefix=/usr/local --enable-debug-msgs && cd build && make -j$(nproc) && make install && ldconfig"
 # Extra
-install_component "snort3_extra" "https://github.com/snort3/snort3_extra.git" "./configure_cmake.sh --prefix=/usr/local && cd build && make -j$(nproc) && make install && ldconfig"
+# install_component "snort3_extra" "https://github.com/snort3/snort3_extra.git" "./configure_cmake.sh --prefix=/usr/local && cd build && make -j$(nproc) && make install && ldconfig"
 
 info "Configuring Snort 3..."
 mkdir -p "$SNORT_RULES_DIR" "$SNORT_LOG_DIR" "$SNORT_ML_DIR" "$DEST_PCAPGEN_DIR" "$DEST_TEMPLATE_DIR"
