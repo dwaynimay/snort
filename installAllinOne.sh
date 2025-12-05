@@ -25,7 +25,7 @@ SNORT_ML_DIR="$SNORT_DIR/models"
 SRC_PCAPGEN="$SCRIPT_DIR/tools/pcap_gen/sqlpcap.py"
 SRC_DASHBOARD_APP="$SCRIPT_DIR/dashboard/app.py"
 SRC_DASHBOARD_HTML="$SCRIPT_DIR/dashboard/templates/index.html"
-DEST_PCAPGEN_DIR="/usr/local/src/libml/examples/classifier"
+DEST_PCAPGEN_DIR="$SNORT_DIR/pcap"
 DEST_DASHBOARD_DIR="/usr/local/src/snort_dashboard"
 DEST_TEMPLATE_DIR="$DEST_DASHBOARD_DIR/templates"
 WAZUH_CONFIG="/var/ossec/etc/ossec.conf"
@@ -292,7 +292,7 @@ success "Snort 3 installed and services started."
 # Instal Wazuh
 info "[4/5] Installing Wazuh (All-in-One)..."
 cd /tmp
-curl -sO https://packages.wazuh.com/4.8/wazuh-install.sh >>"$LOG_FILE" 2>&1
+curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh >>"$LOG_FILE" 2>&1
 bash wazuh-install.sh -a | tee -a "$LOG_FILE"
 
 info "Configuring Wazuh Manager for Snort..."
@@ -345,6 +345,7 @@ if [ -f "$WAZUH_CONFIG_RULES" ]; then
 else
     error "Wazuh rules file not found!"
 fi
+
 systemctl restart wazuh-manager
 success "Wazuh linked to Snort logs."
 
