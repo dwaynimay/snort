@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+
 ################################################################################
 # Konfigurasi dan Variabel
 ################################################################################
@@ -25,6 +26,7 @@ WAZUH_CONFIG_RULES="/var/ossec/etc/rules/local_rules.xml"
 ACTIVE_IFACE=$(ip route get 1 | awk '{print $5; exit}') || ACTIVE_IFACE="enp0s3"
 VM_IP=$(ip route get 1 | awk '{print $7; exit}') || VM_IP="Unknown"
 REAL_USER="${SUDO_USER:-$(whoami)}"
+
 
 ################################################################################
 # HELPER FUNCTIONS
@@ -71,11 +73,11 @@ check_root() {
         error "run as Root (sudo ./installManager.sh)"
     fi
 }
+
 ################################################################################
 # Instalasi
 ################################################################################
 
-# Preparasi
 banner
 check_root
 
@@ -84,28 +86,30 @@ export DEBIAN_FRONTEND=noninteractive
 export TZ=UTC
 
 # Update & Dependensi
-info "[1/5] Updating system and installing base packages..."
+info "[1/2] Updating system and installing base packages..."
 apt-get update >>"$LOG_FILE" 2>&1
 apt-get upgrade -y >>"$LOG_FILE" 2>&1
 
 PACKAGES=(
-    ca-certificates curl git nano iproute2 iputils-ping rsyslog sudo tzdata openssh-server tcpdump htop dstat
+    ca-certificates curl nano iproute2 iputils-ping rsyslog sudo tzdata openssh-server tcpdump htop dstat
 )
+
 apt-get install --no-install-recommends -y "${PACKAGES[@]}" >>"$LOG_FILE" 2>&1
 
 # Konfigurasi SSH
 systemctl enable ssh >/dev/null 2>&1 || true
 systemctl start ssh  >/dev/null 2>&1 || true
 SSH_STATUS=$(systemctl is-active ssh || echo "unknown")
+
 success "System updated & dependencies installed."
 
 # Instal Wazuh
-info "Installing Wazuh (All-in-One)..."
+info "[2/2] Installing Wazuh All in One"
 cd /tmp
-curl -sO https://packages.wazuh.com/4.x/wazuh-install.sh >>"$LOG_FILE" 2>&1
+curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh >>"$LOG_FILE" 2>&1
 bash wazuh-install.sh -a | tee -a "$LOG_FILE"
 
-if [ -f "$WAZUH_CONFIG_DECODER" ]; then
+if [ ! -f "$WAZUH_CONFIG_DECODER" ]; then
     cp "$WAZUH_CONFIG_DECODER" "${WAZUH_CONFIG_DECODER}.bak"
     sed -i '$a \
     \
@@ -142,6 +146,11 @@ else
 fi
 
 systemctl restart wazuh-manager
+WAZUH_STATUS=$(systemctl is-active wazuh-manager || echo "unknown")
+
+################################################################################
+# Report
+################################################################################
 
 # REPORT
 echo -e "${YELLOW}========================================${NC}"
@@ -155,7 +164,7 @@ echo "  User        : $REAL_USER"
 echo "  Login       : ssh $REAL_USER@$VM_IP"
 echo ""
 echo -e "${BLUE}SERVICE STATUS:${NC}"
-echo "  Manager     : $(systemctl is-active wazuh-manager)"
+echo "  Manager     : $WAZUH_STATUS"
 echo ""
 echo -e "${YELLOW}Full Logs: $LOG_FILE${NC}"
 echo -e "${YELLOW}========================================${NC}"
