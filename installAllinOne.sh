@@ -229,8 +229,8 @@ fi
 # --- 4. Copy Dashboard Files ---
 if [ -f "$SRC_DASHBOARD_APP" ] && [ -f "$SRC_DASHBOARD_HTML" ]; then
     info " -> Copying Dashboard App & Templates..."
-    cp "$SRC_DASHBOARD_APP" "$DEST_DASHBOARD_DIR/app.py"
-    cp "$SRC_DASHBOARD_HTML" "$DEST_TEMPLATE_DIR/index.html"
+    cp "$SRC_DASHBOARD_APP" "$DEST_DASHBOARD_DIR/app2.py"
+    cp "$SRC_DASHBOARD_HTML" "$DEST_TEMPLATE_DIR/index2.html"
 else
     echo -e "${RED}[WARN] File Dashboard (app.py/index.html) tidak lengkap di folder source.${NC}"
 fi
@@ -292,7 +292,7 @@ success "Snort 3 installed and services started."
 # Instal Wazuh
 info "[4/5] Installing Wazuh (All-in-One)..."
 cd /tmp
-curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh >>"$LOG_FILE" 2>&1
+curl -sO https://packages.wazuh.com/4.x/wazuh-install.sh >>"$LOG_FILE" 2>&1
 bash wazuh-install.sh -a | tee -a "$LOG_FILE"
 
 info "Configuring Wazuh Manager for Snort..."

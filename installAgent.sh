@@ -229,8 +229,8 @@ fi
 # --- 4. Copy Dashboard Files ---
 if [ -f "$SRC_DASHBOARD_APP" ] && [ -f "$SRC_DASHBOARD_HTML" ]; then
     info " -> Copying Dashboard App & Templates..."
-    cp "$SRC_DASHBOARD_APP" "$DEST_DASHBOARD_DIR/app.py"
-    cp "$SRC_DASHBOARD_HTML" "$DEST_TEMPLATE_DIR/index.html"
+    cp "$SRC_DASHBOARD_APP" "$DEST_DASHBOARD_DIR/app2.py"
+    cp "$SRC_DASHBOARD_HTML" "$DEST_TEMPLATE_DIR/index2.html"
 else
     echo -e "${RED}[WARN] File Dashboard (app.py/index.html) tidak lengkap di folder source.${NC}"
 fi
@@ -274,9 +274,6 @@ systemctl enable snort3-nic.service snort-dashboard.service >>"$LOG_FILE" 2>&1
 systemctl start snort3-nic.service snort-dashboard.service >>"$LOG_FILE" 2>&1
 success "Snort 3 installed and services started."
 
-# Instal Wazuh
-# ... (bagian atas skrip tetap sama) ...
-
 # Instal Wazuh Agent
 info "[4/5] Installing Wazuh Agent..."
 # GANTI INI DENGAN IP WAZUH MANAGER ANDA!
@@ -297,7 +294,11 @@ if [ -f "$WAZUH_CONFIG" ]; then
     cp "$WAZUH_CONFIG" "${WAZUH_CONFIG}.bak"
     
     if ! grep -q "$SNORT_LOG_DIR/alert_fast.txt" "$WAZUH_CONFIG"; then
-        sed -i '/<\/ossec_config>/i \
+        LAST_LINE=$(grep -n "<\/ossec_config>" "$WAZUH_CONFIG" | tail -n 1 | cut -d: -f1)
+        if [ -z "$LAST_LINE" ]; then
+            error "Tag penutup </ossec_config> tidak ditemukan dalam file config!"
+        fi
+        sed -i "${LAST_LINE}i \\
   <localfile>\
     <log_format>snort-fast</log_format>\
     <location>'"$SNORT_LOG_DIR"'/alert_fast.txt</location>\
@@ -315,6 +316,7 @@ systemctl enable wazuh-agent >>"$LOG_FILE" 2>&1
 systemctl restart wazuh-agent >>"$LOG_FILE" 2>&1
 
 success "Wazuh Agent installed and connected to Manager ($WAZUH_MANAGER_IP)."
+
 # REPORT
 echo -e "${YELLOW}========================================${NC}"
 echo -e "${GREEN}      CAPSTONE INSTALLATION REPORT      ${NC}"
@@ -324,7 +326,7 @@ echo "  SSH Status  : $SSH_STATUS"
 echo "  Interface   : $ACTIVE_IFACE"
 echo "  VM IP       : $VM_IP"
 echo "  User        : $REAL_USER"
-echo "  Login       : ssh $USERNAME_USER@$VM_IP"
+echo "  Login       : ssh $REAL_USER@$VM_IP"
 echo ""
 echo -e "${BLUE}COMPONENTS:${NC}"
 echo "  DVWA URL    : http://$VM_IP/dvwa (admin / password)"
