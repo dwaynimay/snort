@@ -16,18 +16,7 @@ NC='\033[0m'
 # --- Paths ---
 LOG_FILE="/var/log/snortEnv.log"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SNORT_DIR="/usr/local/etc/snort"
-SNORT_LOG_DIR="/var/log/snort"
-SNORT_RULES_DIR="$SNORT_DIR/rules"
-SNORT_RULES_FILE="$SNORT_RULES_DIR/rules.local"
-SNORT_LUA="$SNORT_DIR/snort.lua"
-SNORT_ML_DIR="$SNORT_DIR/models"
-SRC_PCAPGEN="$SCRIPT_DIR/tools/pcap_gen/sqlpcap.py"
-SRC_DASHBOARD_APP="$SCRIPT_DIR/dashboard/app.py"
-SRC_DASHBOARD_HTML="$SCRIPT_DIR/dashboard/templates/index.html"
-DEST_PCAPGEN_DIR="$SNORT_DIR/pcap"
-DEST_DASHBOARD_DIR="/usr/local/src/snort_dashboard"
-DEST_TEMPLATE_DIR="$DEST_DASHBOARD_DIR/templates"
+
 WAZUH_CONFIG="/var/ossec/etc/ossec.conf"
 WAZUH_CONFIG_DECODER="/var/ossec/etc/decoders/local_decoder.xml"
 WAZUH_CONFIG_RULES="/var/ossec/etc/rules/local_rules.xml"
@@ -100,13 +89,7 @@ apt-get update >>"$LOG_FILE" 2>&1
 apt-get upgrade -y >>"$LOG_FILE" 2>&1
 
 PACKAGES=(
-    # dependensi global
-    ca-certificates curl wget git nano vim net-tools iproute2 gdb jq
-    iputils-ping rsyslog sudo tzdata ethtool openssh-server tcpdump netcat-openbsd
-    python3 python3-pip python3-venv tcpreplay python3-scapy
-
-    # dependensi dashboard custom
-    python3-flask
+    ca-certificates curl git nano iproute2 iputils-ping rsyslog sudo tzdata openssh-server tcpdump htop dstat
 )
 apt-get install --no-install-recommends -y "${PACKAGES[@]}" >>"$LOG_FILE" 2>&1
 
@@ -119,7 +102,7 @@ success "System updated & dependencies installed."
 # Instal Wazuh
 info "Installing Wazuh (All-in-One)..."
 cd /tmp
-curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh >>"$LOG_FILE" 2>&1
+curl -sO https://packages.wazuh.com/4.x/wazuh-install.sh >>"$LOG_FILE" 2>&1
 bash wazuh-install.sh -a | tee -a "$LOG_FILE"
 
 if [ -f "$WAZUH_CONFIG_DECODER" ]; then
@@ -159,7 +142,6 @@ else
 fi
 
 systemctl restart wazuh-manager
-success "Wazuh linked to Snort logs."
 
 # REPORT
 echo -e "${YELLOW}========================================${NC}"
@@ -170,7 +152,7 @@ echo "  SSH Status  : $SSH_STATUS"
 echo "  Interface   : $ACTIVE_IFACE"
 echo "  VM IP       : $VM_IP"
 echo "  User        : $REAL_USER"
-echo "  Login       : ssh $USERNAME_USER@$VM_IP"
+echo "  Login       : ssh $REAL_USER@$VM_IP"
 echo ""
 echo -e "${BLUE}SERVICE STATUS:${NC}"
 echo "  Manager     : $(systemctl is-active wazuh-manager)"
