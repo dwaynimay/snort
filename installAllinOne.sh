@@ -214,7 +214,7 @@ sed -i "/enable_builtin_rules = true,/a \\
         include $SNORT_RULES_FILE \\
     ]]," "$SNORT_LUA"
 
-sed -i 's/--alert_fast = { }/alert_fast = { file = true, limit = 100 },/' "$SNORT_LUA"
+sed -i 's/--alert_fast = { }/alert_fast = { file = true, limit = 100 }/' "$SNORT_LUA"
 
 # copy pcapgen
 # --- 3. Copy & Config PCAP Generator ---
@@ -261,7 +261,7 @@ After=network.target snort3-nic.service
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/snort -c $SNORT_LUA -s 65535 -k none -i $ACTIVE_IFACE -A alert_fast -l $SNORT_LOG_DIR -R $SNORT_RULES_DIR -Q --daq afpacket
+ExecStart=/usr/local/bin/snort -c $SNORT_LUA -s 65535 -k none -i $ACTIVE_IFACE -A alert_fast -l $SNORT_LOG_DIR -Q --daq afpacket
 ExecReload=/bin/kill -HUP \$MAINPID
 Restart=on-failure
 
@@ -358,7 +358,7 @@ echo "  SSH Status  : $SSH_STATUS"
 echo "  Interface   : $ACTIVE_IFACE"
 echo "  VM IP       : $VM_IP"
 echo "  User        : $REAL_USER"
-echo "  Login       : ssh $USERNAME_USER@$VM_IP"
+echo "  Login       : ssh $REAL_USER@$VM_IP"
 echo ""
 echo -e "${BLUE}COMPONENTS:${NC}"
 echo "  DVWA URL    : http://$VM_IP/dvwa (admin / password)"

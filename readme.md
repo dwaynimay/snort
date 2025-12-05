@@ -234,3 +234,10 @@ snort -c /usr/local/etc/snort/snort.lua --talos --lua 'snort_ml_engine = { http_
 - [Dokumentasi Resmi SnortML](https://docs.snort.org/misc/snort_ml)
 - [Snort3 GitHub Repository](https://github.com/snort3/snort3)
 - [Wazuh Documentation](https://documentation.wazuh.com/)
+
+
+
+hardware
+apt-get update
+apt-get install -y dstat
+dstat -tcmdn --output /path/ke/nama_file.csv 1

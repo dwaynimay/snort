@@ -104,7 +104,7 @@ PACKAGES=(
     # dependensi global
     ca-certificates curl wget git nano vim net-tools iproute2 gdb jq
     iputils-ping rsyslog sudo tzdata ethtool openssh-server tcpdump netcat-openbsd
-    python3 python3-pip python3-venv tcpreplay python3-scapy
+    python3 python3-pip python3-venv tcpreplay python3-scapy dstat
 
     # dependensi dashboard custom
     python3-flask
@@ -214,7 +214,7 @@ sed -i "/enable_builtin_rules = true,/a \\
         include $SNORT_RULES_FILE \\
     ]]," "$SNORT_LUA"
 
-sed -i 's/--alert_fast = { }/alert_fast = { file = true, limit = 100 },/' "$SNORT_LUA"
+sed -i 's/--alert_fast = { }/alert_fast = { file = true, limit = 100 }/' "$SNORT_LUA"
 
 # copy pcapgen
 # --- 3. Copy & Config PCAP Generator ---
@@ -253,21 +253,6 @@ RemainAfterExit=yes
 [Install]
 WantedBy=default.target
 EOF
-# Snort Service
-cat >/etc/systemd/system/snort.service <<EOF
-[Unit]
-Description=Snort 3 IPS (Inline)
-After=network.target snort3-nic.service
-
-[Service]
-Type=simple
-ExecStart=/usr/local/bin/snort -c $SNORT_LUA -s 65535 -k none -i $ACTIVE_IFACE -A alert_fast -l $SNORT_LOG_DIR -R $SNORT_RULES_DIR -Q --daq afpacket
-ExecReload=/bin/kill -HUP \$MAINPID
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-EOF
 # custom dashboard
 cat > /etc/systemd/system/snort-dashboard.service <<EOF
 [Unit]
@@ -285,8 +270,8 @@ WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload >>"$LOG_FILE" 2>&1
-systemctl enable snort3-nic.service snort.service snort-dashboard.service >>"$LOG_FILE" 2>&1
-systemctl start snort3-nic.service snort.service snort-dashboard.service >>"$LOG_FILE" 2>&1
+systemctl enable snort3-nic.service snort-dashboard.service >>"$LOG_FILE" 2>&1
+systemctl start snort3-nic.service snort-dashboard.service >>"$LOG_FILE" 2>&1
 success "Snort 3 installed and services started."
 
 # Instal Wazuh
@@ -343,7 +328,7 @@ echo "  Login       : ssh $USERNAME_USER@$VM_IP"
 echo ""
 echo -e "${BLUE}COMPONENTS:${NC}"
 echo "  DVWA URL    : http://$VM_IP/dvwa (admin / password)"
-echo "  Wazuh UI    : https://$VM_IP (See install output for pass)"
+echo "  DVWA URL    : http://$VM_IP:5000"
 echo "  Snort Rules : $SNORT_RULES_FILE"
 echo "  ML Model    : $SNORT_ML_DIR"
 echo "  Snort Log   : $SNORT_LOG_DIR/alert_fast.txt"
