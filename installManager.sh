@@ -109,7 +109,7 @@ cd /tmp
 curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh >>"$LOG_FILE" 2>&1
 bash wazuh-install.sh -a | tee -a "$LOG_FILE"
 
-if [ ! -f "$WAZUH_CONFIG_DECODER" ]; then
+if [ -f "$WAZUH_CONFIG_DECODER" ]; then
     cp "$WAZUH_CONFIG_DECODER" "${WAZUH_CONFIG_DECODER}.bak"
     sed -i '$a \
     \
