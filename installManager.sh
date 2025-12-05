@@ -82,6 +82,39 @@ check_root() {
         error "run as Root (sudo ./installManager.sh)"
     fi
 }
+################################################################################
+# Instalasi
+################################################################################
+
+# Preparasi
+banner
+check_root
+
+echo "=== Setting non-interactive mode ==="
+export DEBIAN_FRONTEND=noninteractive
+export TZ=UTC
+
+# Update & Dependensi
+info "[1/5] Updating system and installing base packages..."
+apt-get update >>"$LOG_FILE" 2>&1
+apt-get upgrade -y >>"$LOG_FILE" 2>&1
+
+PACKAGES=(
+    # dependensi global
+    ca-certificates curl wget git nano vim net-tools iproute2 gdb jq
+    iputils-ping rsyslog sudo tzdata ethtool openssh-server tcpdump netcat-openbsd
+    python3 python3-pip python3-venv tcpreplay python3-scapy
+
+    # dependensi dashboard custom
+    python3-flask
+)
+apt-get install --no-install-recommends -y "${PACKAGES[@]}" >>"$LOG_FILE" 2>&1
+
+# Konfigurasi SSH
+systemctl enable ssh >/dev/null 2>&1 || true
+systemctl start ssh  >/dev/null 2>&1 || true
+SSH_STATUS=$(systemctl is-active ssh || echo "unknown")
+success "System updated & dependencies installed."
 
 # Instal Wazuh
 info "Installing Wazuh (All-in-One)..."
@@ -128,3 +161,19 @@ fi
 systemctl restart wazuh-manager
 success "Wazuh linked to Snort logs."
 
+# REPORT
+echo -e "${YELLOW}========================================${NC}"
+echo -e "${GREEN}      CAPSTONE INSTALLATION REPORT      ${NC}"
+echo -e "${YELLOW}========================================${NC}"
+echo -e "${BLUE}SYSTEM INFO:${NC}"
+echo "  SSH Status  : $SSH_STATUS"
+echo "  Interface   : $ACTIVE_IFACE"
+echo "  VM IP       : $VM_IP"
+echo "  User        : $REAL_USER"
+echo "  Login       : ssh $USERNAME_USER@$VM_IP"
+echo ""
+echo -e "${BLUE}SERVICE STATUS:${NC}"
+echo "  Manager     : $(systemctl is-active wazuh-manager)"
+echo ""
+echo -e "${YELLOW}Full Logs: $LOG_FILE${NC}"
+echo -e "${YELLOW}========================================${NC}"
