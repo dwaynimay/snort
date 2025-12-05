@@ -128,6 +128,11 @@ PACKAGES=(
 )
 apt-get install --no-install-recommends -y "${PACKAGES[@]}" >>"$LOG_FILE" 2>&1
 
+ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+timedatectl set-timezone Asia/Jakarta
+timedatectl set-ntp true
+systemctl restart systemd-timesyncd 2>/dev/null || true
+
 # Konfigurasi SSH
 systemctl enable ssh >/dev/null 2>&1 || true
 systemctl start ssh  >/dev/null 2>&1 || true
