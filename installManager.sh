@@ -96,6 +96,11 @@ PACKAGES=(
 
 apt-get install --no-install-recommends -y "${PACKAGES[@]}" >>"$LOG_FILE" 2>&1
 
+ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+timedatectl set-timezone Asia/Jakarta
+timedatectl set-ntp true
+systemctl restart systemd-timesyncd 2>/dev/null || true
+
 # Konfigurasi SSH
 systemctl enable ssh >/dev/null 2>&1 || true
 systemctl start ssh  >/dev/null 2>&1 || true
@@ -109,7 +114,7 @@ cd /tmp
 curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh >>"$LOG_FILE" 2>&1
 bash wazuh-install.sh -a | tee -a "$LOG_FILE"
 
-if [ ! -f "$WAZUH_CONFIG_DECODER" ]; then
+if [ -f "$WAZUH_CONFIG_DECODER" ]; then
     cp "$WAZUH_CONFIG_DECODER" "${WAZUH_CONFIG_DECODER}.bak"
     sed -i '$a \
     \
