@@ -307,20 +307,28 @@ WAZUH_MANAGER="$WAZUH_MANAGER_IP" WAZUH_AGENT_NAME="$WAZUH_AGENT_NAME" apt-get i
 
 info " -> Configuring Wazuh Agent to read Snort logs..."
 
+# Pastikan file config ada sebelum diedit
 if [ -f "$WAZUH_CONFIG" ]; then
     cp "$WAZUH_CONFIG" "${WAZUH_CONFIG}.bak"
     
-    if ! grep -q "$SNORT_LOG_DIR/alert_fast.txt" "$WAZUH_CONFIG"; then
+    # Cek apakah konfigurasi snort sudah ada
+    if ! grep -q "snort-fast" "$WAZUH_CONFIG"; then
+        
+        # Cari baris penutup </ossec_config>
         LAST_LINE=$(grep -n "<\/ossec_config>" "$WAZUH_CONFIG" | tail -n 1 | cut -d: -f1)
+        
         if [ -z "$LAST_LINE" ]; then
             error "Tag penutup </ossec_config> tidak ditemukan dalam file config!"
+        else
+        
+            sed -i "${LAST_LINE}i \\
+  <localfile>\\
+    <log_format>snort-fast</log_format>\\
+    <location>${SNORT_LOG_DIR}/alert_fast.txt</location>\\
+  </localfile>" "$WAZUH_CONFIG"
+            
+            success "Snort log configuration added to Wazuh Agent."
         fi
-        sed -i "${LAST_LINE}i \\
-  <localfile>\
-    <log_format>snort-fast</log_format>\
-    <location>'"$SNORT_LOG_DIR"'/alert_fast.txt</location>\
-  </localfile>' "$WAZUH_CONFIG"
-        success "Snort log configuration added to Wazuh Agent."
     else
         info "Wazuh config for Snort already present."
     fi
