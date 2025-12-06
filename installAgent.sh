@@ -21,6 +21,7 @@ SNORT_LOG_DIR="/var/log/snort"
 SNORT_RULES_DIR="$SNORT_DIR/rules"
 SNORT_RULES_FILE="$SNORT_RULES_DIR/rules.local"
 SNORT_LUA="$SNORT_DIR/snort.lua"
+SRC_MODEL_DIR="$SCRIPT_DIR/models"
 SNORT_ML_DIR="$SNORT_DIR/models"
 SRC_PCAPGEN="$SCRIPT_DIR/tools/pcap_gen/sqlpcap.py"
 SRC_DASHBOARD_APP="$SCRIPT_DIR/dashboard/app.py"
@@ -216,8 +217,20 @@ sed -i "/enable_builtin_rules = true,/a \\
 
 sed -i 's/--alert_fast = { }/alert_fast = { file = true, limit = 100 }/' "$SNORT_LUA"
 
+# copy model
+if [ ! -d "$SRC_MODEL_DIR" ]; then
+    echo -e "${YELLOW}[WARN] Source model folder not found: $SRC_MODEL_DIR. Skipping.${NC}"
+else
+    FILE_COUNT=$(find "$SRC_MODEL_DIR" -type f | wc -l)
+    if [ "$FILE_COUNT" -eq 0 ]; then
+        echo -e "${YELLOW}[WARN] No ML model files found in $SRC_MODEL_DIR. Skipping copy.${NC}"
+    else
+        echo "[INFO] Copying $FILE_COUNT ML model file(s) to $SNORT_ML_DIR..."
+        cp -r "$SRC_MODEL_DIR/"* "$SNORT_ML_DIR/"
+        echo -e "${GREEN}[OK] ML models copied successfully.${NC}"
+    fi
+fi
 # copy pcapgen
-# --- 3. Copy & Config PCAP Generator ---
 if [ -f "$SRC_PCAPGEN" ]; then
     info " -> Copying Attack Tool (sqlpcap.py)..."
     cp "$SRC_PCAPGEN" "$DEST_PCAPGEN_DIR/sqlpcap.py"
@@ -225,8 +238,7 @@ if [ -f "$SRC_PCAPGEN" ]; then
 else
     echo -e "${RED}[WARN] File $SRC_PCAPGEN tidak ditemukan. Skip copy.${NC}"
 fi
-
-# --- 4. Copy Dashboard Files ---
+# copy dashboard
 if [ -f "$SRC_DASHBOARD_APP" ] && [ -f "$SRC_DASHBOARD_HTML" ]; then
     info " -> Copying Dashboard App & Templates..."
     cp "$SRC_DASHBOARD_APP" "$DEST_DASHBOARD_DIR/app2.py"
