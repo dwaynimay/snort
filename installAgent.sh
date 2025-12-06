@@ -320,7 +320,7 @@ if [ -f "$WAZUH_CONFIG" ]; then
         if [ -z "$LAST_LINE" ]; then
             error "Tag penutup </ossec_config> tidak ditemukan dalam file config!"
         else
-        
+
             sed -i "${LAST_LINE}i \\
   <localfile>\\
     <log_format>snort-fast</log_format>\\
@@ -355,13 +355,12 @@ echo "  Login       : ssh $REAL_USER@$VM_IP"
 echo ""
 echo -e "${BLUE}COMPONENTS:${NC}"
 echo "  DVWA URL    : http://$VM_IP/dvwa (admin / password)"
-echo "  DVWA URL    : http://$VM_IP:5000"
+echo "  Dash URL    : http://$VM_IP:5000"
 echo "  Snort Rules : $SNORT_RULES_FILE"
 echo "  ML Model    : $SNORT_ML_DIR"
 echo "  Snort Log   : $SNORT_LOG_DIR/alert_fast.txt"
 echo ""
 echo -e "${BLUE}SERVICE STATUS:${NC}"
-echo "  Snort       : $(systemctl is-active snort)"
 echo "  Wazuh Agent : $(systemctl is-active wazuh-agent)"
 echo "  Web (DVWA)  : $(systemctl is-active apache2)"
 echo ""
