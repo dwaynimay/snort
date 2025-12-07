@@ -119,9 +119,7 @@ if [ -f "$WAZUH_CONFIG_DECODER" ]; then
     sed -i '$a \
     \
     <decoder name="snort_ml_decoder">\
-        <prematch>snort_ml</prematch>\
-        <regex>^(\d{4}) Snort alert: (\w+) - (.*)$</regex>\
-        <order>year,program,alert_message</order>\
+        <program_name>snort_ml</program_name>\
     </decoder>' "$WAZUH_CONFIG_DECODER"
 else
     error "Wazuh encoder file not found!"
@@ -131,19 +129,12 @@ if [ -f "$WAZUH_CONFIG_RULES" ]; then
     cp "$WAZUH_CONFIG_RULES" "${WAZUH_CONFIG_RULES}.bak"
     sed -i '$a \
     \
-    <group name="snort_ml,ids,">\
-    <rule id="100100" level="7">\
+    <group name="snort_ml,">\
+    <rule id="100100" level="10">\
         <decoded_as>snort_ml_decoder</decoded_as>\
         <match>snort_ml</match>\
         <description>SnortML Detection: Potential threat detected</description>\
-        <group>ml_alert,ids,</group>\
-    </rule>\
-    \
-    <rule id="100101" level="10">\
-        <if_sid>100100</if_sid>\
-        <match>Neural Network Based Exploit Detection</match>\
-        <description>SnortML Detection: ML Exploit Detection</description>\
-        <group>ml_high_confidence,</group>\
+        <group>snort_ml</group>\
     </rule>\
     </group>' "$WAZUH_CONFIG_RULES"
 else

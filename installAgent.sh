@@ -216,6 +216,7 @@ cp "$SNORT_LUA" "${SNORT_LUA}.bak"
 sed -i 's/--\s*enable_builtin_rules/enable_builtin_rules/' "$SNORT_LUA"
 sed -i "/enable_builtin_rules = true,/a \\
     mode = 'inline',\\
+    action_override = 'drop',\\
     rules = [[ \\
         include $SNORT_RULES_FILE \\
     ]]," "$SNORT_LUA"
