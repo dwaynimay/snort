@@ -114,28 +114,16 @@ cd /tmp
 curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh >>"$LOG_FILE" 2>&1
 bash wazuh-install.sh -a | tee -a "$LOG_FILE"
 
-if [ -f "$WAZUH_CONFIG_DECODER" ]; then
-    cp "$WAZUH_CONFIG_DECODER" "${WAZUH_CONFIG_DECODER}.bak"
-    sed -i '$a \
-    \
-    <decoder name="snort_ml_decoder">\
-        <program_name>snort_ml</program_name>\
-    </decoder>' "$WAZUH_CONFIG_DECODER"
-else
-    error "Wazuh encoder file not found!"
-fi
-
 if [ -f "$WAZUH_CONFIG_RULES" ]; then
     cp "$WAZUH_CONFIG_RULES" "${WAZUH_CONFIG_RULES}.bak"
     sed -i '$a \
     \
-    <group name="snort_ml,">\
-    <rule id="100100" level="10">\
-        <decoded_as>snort_ml_decoder</decoded_as>\
+    <group name="snort_ml">\
+      <rule id="100100" level="10">\
         <match>snort_ml</match>\
-        <description>SnortML Detection: Potential threat detected</description>\
+        <description>Snort ML Detection: terdeteksi serangan oleh ML Neural Network</description>\
         <group>snort_ml</group>\
-    </rule>\
+      </rule>\
     </group>' "$WAZUH_CONFIG_RULES"
 else
     error "Wazuh rules file not found!"
