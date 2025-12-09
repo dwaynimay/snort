@@ -122,7 +122,6 @@ if [ -f "$WAZUH_CONFIG_RULES" ]; then
       <rule id="100100" level="10">\
         <match>snort_ml</match>\
         <description>Snort ML Detection: terdeteksi serangan oleh ML Neural Network</description>\
-        <group>snort_ml</group>\
       </rule>\
     </group>' "$WAZUH_CONFIG_RULES"
 else
