@@ -1,45 +1,176 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Nama file log akan menyertakan tanggal saat ini
-LOGFILE="hardware_log_$(date +%Y%m%d_%H%M%S).txt"
+# Interval pengambilan data (detik)
+INTERVAL=1
 
-# Mencetak header ke file log
-echo "Timestamp | CPU_Idle(%) | RAM_Free(MB) | Disk_r(kB/s) | Disk_w(kB/s) | NET_RX(kB/s) | NET_TX(kB/s)" > "$LOGFILE"
+# Nama file log CSV dengan timestamp
+LOGFILE="hardware_log_$(date +%Y%m%d_%H%M%S).csv"
 
-# Mencetak header ke terminal (optional, agar Anda tahu logging sudah mulai)
-echo "Logging hardware stats every 1 second to: $LOGFILE"
-echo "---"
-echo "Timestamp | CPU_Idle(%) | RAM_Free(MB) | Disk_r(kB/s) | Disk_w(kB/s) | NET_RX(kB/s) | NET_TX(kB/s)"
+# Asumsi ukuran sektor disk (byte) - mayoritas 512
+SECTOR_SIZE=512
 
-# Loop utama untuk mengumpulkan data setiap detik
+# Tulis header CSV
+echo "timestamp,cpu_idle_pct,ram_available_mb,disk_read_kbs,disk_write_kbs,net_rx_kbs,net_tx_kbs" > "$LOGFILE"
+
+echo "Logging hardware stats setiap ${INTERVAL}s ke file: $LOGFILE"
+echo "Tekan Ctrl+C untuk berhenti."
+echo "Kolom: timestamp,cpu_idle_pct,ram_available_mb,disk_read_kbs,disk_write_kbs,net_rx_kbs,net_tx_kbs"
+
+# Trap agar ada pesan saat keluar
+trap 'echo; echo "Stop logging. Log tersimpan di $LOGFILE"; exit 0' INT
+
+# --- Fungsi bantu ---
+
+get_cpu_times() {
+  # Baca baris pertama 'cpu' dari /proc/stat
+  # Format: cpu  user nice system idle iowait irq softirq steal guest guest_nice
+  read -r _ user nice system idle iowait irq softirq steal guest guest_nice < /proc/stat
+
+  # Total waktu (semua state)
+  local total=$((user + nice + system + idle + iowait + irq + softirq + steal))
+
+  echo "$idle $total"
+}
+
+get_ram_available_mb() {
+  # Kalau MemAvailable ada, pakai itu (lebih realistik)
+  if grep -q "MemAvailable:" /proc/meminfo 2>/dev/null; then
+    awk '/MemAvailable:/ {printf "%.2f", $2/1024}' /proc/meminfo
+  else
+    # Fallback: free + buffers + cached
+    awk '
+      /MemFree:/  {free=$2}
+      /Buffers:/  {buf=$2}
+      /^Cached:/  {cache=$2}
+      END {printf "%.2f", (free+buf+cache)/1024}
+    ' /proc/meminfo
+  fi
+}
+
+get_disk_sectors() {
+  # Sum sektor read & write semua device kecuali loop, ram, fd
+  awk '
+    $3 !~ /^(loop|ram|fd)/ {
+      read_sectors  += $6;
+      write_sectors += $10;
+    }
+    END {print read_sectors, write_sectors}
+  ' /proc/diskstats
+}
+
+get_net_bytes() {
+  # Sum RX/TX bytes semua interface kecuali lo (loopback)
+  awk '
+    NR > 2 {
+      gsub(":", "", $1);
+      iface=$1;
+      if (iface != "lo") {
+        rx += $2;   # RX bytes
+        tx += $10;  # TX bytes
+      }
+    }
+    END {print rx, tx}
+  ' /proc/net/dev
+}
+
+now_seconds() {
+  date +%s.%N
+}
+
+# --- Inisialisasi: ambil sample awal ---
+
+read prev_idle prev_total <<< "$(get_cpu_times)"
+read prev_read_sectors prev_write_sectors <<< "$(get_disk_sectors)"
+read prev_rx_bytes prev_tx_bytes <<< "$(get_net_bytes)"
+prev_time=$(now_seconds)
+
+# Tunggu 1 interval sebelum sample pertama (agar punya delta)
+sleep "$INTERVAL"
+
+# --- Loop utama ---
 while true; do
-  TS=$(date +%H:%M:%S)
-  
-  # Ambil statistik CPU dan RAM dari vmstat
-  VMSTAT_OUT=$(vmstat 1 2 | tail -1)
-  CPU_IDLE=$(echo $VMSTAT_OUT | awk '{print $15}')
-  RAM_FREE_KB=$(echo $VMSTAT_OUT | awk '{print $4}')
-  
-  # Konversi RAM Free dari kB ke MB (dibulatkan 1 desimal)
-  RAM_FREE_MB=$(echo "scale=1; $RAM_FREE_KB / 1024" | bc 2>/dev/null || echo "N/A")
+  curr_time=$(now_seconds)
 
-  # Ambil total Disk Read/Write dari iostat (rata-rata keseluruhan)
-  # Gunakan kolom 3 (r/s) dan 4 (w/s) dari laporan iostat -k
-  DISK_STATS=$(iostat -d -k 1 2 | awk '/avg-cpu/ {next} /Device/ {next} NF>1 {print $3, $4}' | tail -1)
-  DISK_R=$(echo $DISK_STATS | awk '{print $1}')
-  DISK_W=$(echo $DISK_STATS | awk '{print $2}')
-  
-  # Ambil statistik Network dari sar
-  # Perlu menjalankan sar secara terpisah karena intervalnya hanya 1 detik
-  # rxkB/s dan txkB/s (kolom $5 dan $6 dari baris Average)
-  NET_STATS=$(sar -n DEV 1 1 | awk '/Average:/ && $2!="IFACE" {print $5, $6}' | tail -1)
-  NET_RX=$(echo $NET_STATS | awk '{print $1}')
-  NET_TX=$(echo $NET_STATS | awk '{print $2}')
+  # Hitung selang waktu (dt)
+  dt=$(awk -v n="$curr_time" -v p="$prev_time" 'BEGIN {printf "%.3f", n - p}')
 
-  # Cetak output ke terminal dan ke file log
-  OUTPUT_LINE="$TS | $CPU_IDLE | $RAM_FREE_MB | $DISK_R | $DISK_W | $NET_RX | $NET_TX"
-  echo "$OUTPUT_LINE" | tee -a "$LOGFILE" # tee mencetak ke terminal dan menambahkan ke file
+  # Timestamp untuk log (format ISO-ish)
+  ts=$(date +%Y-%m-%dT%H:%M:%S)
 
-  # Jeda 1 detik
-  sleep 1 
+  # CPU
+  read curr_idle curr_total <<< "$(get_cpu_times)"
+  cpu_idle_pct=$(awk -v pidle="$prev_idle" -v ptotal="$prev_total" \
+                     -v cidle="$curr_idle" -v ctotal="$curr_total" '
+    BEGIN {
+      diff_total = ctotal - ptotal;
+      diff_idle  = cidle - pidle;
+      if (diff_total <= 0) {
+        printf "0.00";
+      } else {
+        printf "%.2f", (diff_idle * 100.0) / diff_total;
+      }
+    }')
+
+  # RAM available (MB)
+  ram_available_mb=$(get_ram_available_mb)
+
+  # Disk sectors
+  read curr_read_sectors curr_write_sectors <<< "$(get_disk_sectors)"
+  disk_read_kbs=$(awk -v pr="$prev_read_sectors" -v cr="$curr_read_sectors" \
+                      -v dt="$dt" -v ss="$SECTOR_SIZE" '
+    BEGIN {
+      diff = cr - pr;
+      if (dt <= 0 || diff < 0) {
+        printf "0.00";
+      } else {
+        printf "%.2f", diff * ss / 1024.0 / dt;
+      }
+    }')
+  disk_write_kbs=$(awk -v pw="$prev_write_sectors" -v cw="$curr_write_sectors" \
+                       -v dt="$dt" -v ss="$SECTOR_SIZE" '
+    BEGIN {
+      diff = cw - pw;
+      if (dt <= 0 || diff < 0) {
+        printf "0.00";
+      } else {
+        printf "%.2f", diff * ss / 1024.0 / dt;
+      }
+    }')
+
+  # Network bytes
+  read curr_rx_bytes curr_tx_bytes <<< "$(get_net_bytes)"
+  net_rx_kbs=$(awk -v pr="$prev_rx_bytes" -v cr="$curr_rx_bytes" -v dt="$dt" '
+    BEGIN {
+      diff = cr - pr;
+      if (dt <= 0 || diff < 0) {
+        printf "0.00";
+      } else {
+        printf "%.2f", diff / 1024.0 / dt;
+      }
+    }')
+  net_tx_kbs=$(awk -v pt="$prev_tx_bytes" -v ct="$curr_tx_bytes" -v dt="$dt" '
+    BEGIN {
+      diff = ct - pt;
+      if (dt <= 0 || diff < 0) {
+        printf "0.00";
+      } else {
+        printf "%.2f", diff / 1024.0 / dt;
+      }
+    }')
+
+  # Tulis ke CSV + echo ke terminal
+  line="$ts,$cpu_idle_pct,$ram_available_mb,$disk_read_kbs,$disk_write_kbs,$net_rx_kbs,$net_tx_kbs"
+  echo "$line" | tee -a "$LOGFILE"
+
+  # Update nilai previous untuk iterasi berikutnya
+  prev_idle=$curr_idle
+  prev_total=$curr_total
+  prev_read_sectors=$curr_read_sectors
+  prev_write_sectors=$curr_write_sectors
+  prev_rx_bytes=$curr_rx_bytes
+  prev_tx_bytes=$curr_tx_bytes
+  prev_time=$curr_time
+
+  # Tunggu interval berikutnya
+  sleep "$INTERVAL"
 done
