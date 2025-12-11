@@ -216,11 +216,11 @@ cp "$SNORT_LUA" "${SNORT_LUA}.bak"
 sed -i 's/--\s*enable_builtin_rules/enable_builtin_rules/' "$SNORT_LUA"
 sed -i "/enable_builtin_rules = true,/a \\
     mode = 'inline',\\
-    action_override = 'drop',\\
+    action_override = 'reject',\\
     rules = [[ \\
         include $SNORT_RULES_FILE \\
     ]]," "$SNORT_LUA"
-
+sed -i 's/-- reject = { }/reject = { reset = "source", control = "network" }/' "$SNORT_LUA"
 sed -i 's/--alert_fast = { }/alert_fast = { file = true, limit = 100 }/' "$SNORT_LUA"
 
 # copy model
