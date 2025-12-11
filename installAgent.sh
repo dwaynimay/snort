@@ -98,6 +98,10 @@ echo "=== Setting non-interactive mode ==="
 export DEBIAN_FRONTEND=noninteractive
 export TZ=UTC
 
+read -p "Masukkan IP Wazuh Manager [Default: 192.168.1.100]: " USER_INPUT_IP
+WAZUH_MANAGER_IP="${USER_INPUT_IP:-192.168.1.100}"
+WAZUH_AGENT_NAME="Snort-Sensor-$REAL_USER"
+
 # Update & Dependensi
 info "[1/5] Updating system and installing base packages..."
 apt-get update >>"$LOG_FILE" 2>&1
@@ -222,7 +226,7 @@ sed -i "/enable_builtin_rules = true,/a \\
     rules = [[ \\
         include $SNORT_RULES_FILE \\
     ]]," "$SNORT_LUA"
-sed -i 's/-- reject = { }/reject = { reset = "source", control = "network" }/' "$SNORT_LUA"
+sed -i 's/-- reject = { }/reject = { reset = "both", control = "network" }/' "$SNORT_LUA"
 sed -i 's/--alert_fast = { }/alert_fast = { file = true, limit = 100 }/' "$SNORT_LUA"
 
 # copy model
@@ -289,7 +293,7 @@ After=network.target
 [Service]
 User=root
 WorkingDirectory=$DEST_DASHBOARD_DIR
-ExecStart=/usr/bin/python3 app.py
+ExecStart=/usr/bin/python3 app2.py
 Restart=always
 
 [Install]
@@ -303,9 +307,7 @@ success "Snort 3 installed and services started."
 
 # Instal Wazuh Agent
 info "[4/5] Installing Wazuh Agent..."
-# GANTI INI DENGAN IP WAZUH MANAGER ANDA!
-WAZUH_MANAGER_IP="192.168.1.100" 
-WAZUH_AGENT_NAME="Snort-Sensor-$REAL_USER"
+echo "Menggunakan Wazuh Manager IP: $WAZUH_MANAGER_IP"
 
 info " -> Adding Wazuh repository..."
 curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
@@ -316,7 +318,6 @@ apt-get update >>"$LOG_FILE" 2>&1
 WAZUH_MANAGER="$WAZUH_MANAGER_IP" WAZUH_AGENT_NAME="$WAZUH_AGENT_NAME" apt-get install -y wazuh-agent >>"$LOG_FILE" 2>&1
 
 info " -> Configuring Wazuh Agent to read Snort logs..."
-
 # Pastikan file config ada sebelum diedit
 if [ -f "$WAZUH_CONFIG" ]; then
     cp "$WAZUH_CONFIG" "${WAZUH_CONFIG}.bak"
