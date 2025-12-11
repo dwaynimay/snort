@@ -24,9 +24,11 @@ SNORT_LUA="$SNORT_DIR/snort.lua"
 SRC_MODEL_DIR="$SCRIPT_DIR/models"
 SNORT_ML_DIR="$SNORT_DIR/models"
 SRC_PCAPGEN="$SCRIPT_DIR/tools/pcap_gen/sqlpcap.py"
+SRC_LOGH="$SCRIPT_DIR/tools/log_hardware.sh"
 SRC_DASHBOARD_APP="$SCRIPT_DIR/dashboard/app.py"
 SRC_DASHBOARD_HTML="$SCRIPT_DIR/dashboard/templates/index.html"
 DEST_PCAPGEN_DIR="$SNORT_DIR/pcap"
+DEST_LOGH_DIR="$SNORT_DIR/log"
 DEST_DASHBOARD_DIR="/usr/local/src/snort_dashboard"
 DEST_TEMPLATE_DIR="$DEST_DASHBOARD_DIR/templates"
 WAZUH_CONFIG="/var/ossec/etc/ossec.conf"
@@ -205,8 +207,8 @@ install_component "snort3" "https://github.com/snort3/snort3.git" "./configure_c
 # install_component "snort3_extra" "https://github.com/snort3/snort3_extra.git" "./configure_cmake.sh --prefix=/usr/local && cd build && make -j$(nproc) && make install && ldconfig"
 
 info "Configuring Snort 3..."
-mkdir -p "$SNORT_RULES_DIR" "$SNORT_LOG_DIR" "$SNORT_ML_DIR" "$DEST_PCAPGEN_DIR" "$DEST_TEMPLATE_DIR"
-chmod 777 "$SNORT_RULES_DIR" "$SNORT_LOG_DIR" "$SNORT_ML_DIR" "$DEST_PCAPGEN_DIR" "$DEST_TEMPLATE_DIR"
+mkdir -p "$SNORT_RULES_DIR" "$SNORT_LOG_DIR" "$SNORT_ML_DIR" "$DEST_PCAPGEN_DIR" "$DEST_LOGH_DIR" "$DEST_TEMPLATE_DIR"
+chmod 777 "$SNORT_RULES_DIR" "$SNORT_LOG_DIR" "$SNORT_ML_DIR" "$DEST_PCAPGEN_DIR" "$DEST_LOGH_DIR" "$DEST_TEMPLATE_DIR"
 
 [ ! -f "$SNORT_RULES_FILE" ] && touch "$SNORT_RULES_FILE" && chmod 666 "$SNORT_RULES_FILE"
 [ ! -f "$SNORT_LOG_DIR/alert_fast.txt" ] && touch "$SNORT_LOG_DIR/alert_fast.txt" && chmod 666 "$SNORT_LOG_DIR/alert_fast.txt"
@@ -252,7 +254,14 @@ if [ -f "$SRC_DASHBOARD_APP" ] && [ -f "$SRC_DASHBOARD_HTML" ]; then
 else
     echo -e "${RED}[WARN] File Dashboard (app.py/index.html) tidak lengkap di folder source.${NC}"
 fi
-
+# log hardware
+if [ -f "$SRC_LOGH" ]; then
+    info " -> Copying log hardware."
+    cp "$SRC_LOGH" "$DEST_LOGH_DIR/log_hardware.sh"
+    chmod +x "$DEST_LOGH_DIR/log_hardware.sh"
+else
+    echo -e "${RED}[WARN] File $SRC_LOGH tidak ditemukan. Skip copy.${NC}"
+fi
 # Services
 info "Creating Systemd Services..."
 # NIC Service
