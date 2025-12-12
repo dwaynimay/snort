@@ -111,7 +111,7 @@ PACKAGES=(
     # dependensi global
     ca-certificates curl wget git nano vim net-tools iproute2 gdb jq
     iputils-ping rsyslog sudo tzdata ethtool openssh-server tcpdump netcat-openbsd
-    python3 python3-pip python3-venv tcpreplay python3-scapy dstat htop
+    python3 python3-pip python3-venv tcpreplay python3-scapy 
 
     # dependensi dashboard custom
     python3-flask
