@@ -1,0 +1,2 @@
+12/15-02:23:10.663117 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+12/15-02:23:28.206652 [reset] [**] [129:15:1]  <enp0s3> "(stream_tcp) reset outside window" [**] [Priority: 3] {TCP} 192.168.18.24:52838 -> 192.168.18.21:80

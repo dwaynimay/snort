@@ -1,0 +1,392 @@
+PS C:\Users\HP> ssh snort@192.168.18.21
+snort@192.168.18.21's password:
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-163-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon Dec 15 02:20:33 AM WIB 2025
+
+  System load:             1.67
+  Usage of /:              16.4% of 36.35GB
+  Memory usage:            6%
+  Swap usage:              0%
+  Processes:               150
+  Users logged in:         0
+  IPv4 address for enp0s3: 192.168.18.21
+  IPv6 address for enp0s3: 2404:8000:1005:1a6e:a00:27ff:fed7:5f75
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+10 updates can be applied immediately.
+8 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+1 additional security update can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+New release '24.04.3 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Mon Dec 15 02:20:36 2025 from 192.168.18.236
+snort@snort:~$ sudo snort -c /usr/local/etc/snort/snort.lua --talos --lua 'snort_ml_engine = { http_param_model = "/usr/local/etc/snort/models/ae.tflite" }; snort_ml = { client_body_depth = -1, http_param_threshold = 0.95 }; trace = { modules = { snort_ml = {all =1 } } };' -A alert_fast -l /var/log/snort -s 65535 -k none -Q --daq afpacket -i enp0s3
+[sudo] password for snort:
+--------------------------------------------------
+o")~   Snort++ 3.10.0.0
+--------------------------------------------------
+Loading /usr/local/etc/snort/snort.lua:
+Loading snort_defaults.lua:
+Finished snort_defaults.lua:
+Loading talos.lua:
+Finished talos.lua:
+        snort
+        ssh
+        snort_ml_engine
+        host_cache
+        pop
+        so_proxy
+        stream_tcp
+        cip
+        mms
+        smtp
+        dce_http_server
+        gtp_inspect
+        profiler
+        packets
+        dce_http_proxy
+        alert_talos
+        alert_fast
+        reject
+        ips
+        hosts
+        stream_icmp
+        binder
+        normalizer
+        wizard
+        appid
+        js_norm
+        file_id
+        http2_inspect
+        http_inspect
+        ftp_data
+        stream_udp
+        ftp_server
+        port_scan
+        search_engine
+        snort_ml
+        dce_tcp
+        dce_smb
+        iec104
+        telnet
+        ssl
+        sip
+        rpc_decode
+        netflow
+        modbus
+        host_tracker
+        stream_user
+        stream_ip
+        process
+        back_orifice
+        classifications
+        dnp3
+        opcua
+        active
+        trace
+        ftp_client
+        decode
+        alerts
+        stream
+        references
+        daq
+        arp_spoof
+        output
+        network
+        dns
+        dce_udp
+        imap
+        file_policy
+        s7commplus
+        stream_file
+Finished /usr/local/etc/snort/snort.lua:
+Loading file_id.rules_file:
+Loading file_magic.rules:
+Finished file_magic.rules:
+Finished file_id.rules_file:
+--------------------------------------------------
+ips policies rule stats
+              id  loaded  shared enabled    file
+               0     859       0     859    /usr/local/etc/snort/snort.lua
+--------------------------------------------------
+rule counts
+       total rules loaded: 859
+               text rules: 219
+            builtin rules: 640
+            option chains: 859
+            chain headers: 1
+--------------------------------------------------
+port rule counts
+             tcp     udp    icmp      ip
+     any     640       0       0       0
+   total     640       0       0       0
+--------------------------------------------------
+service rule counts          to-srv  to-cli
+                   dcerpc:      219     219
+                 ftp-data:      219     219
+                     http:      219     219
+                    http2:      219     219
+                    http3:      219     219
+                     imap:      219     219
+              netbios-ssn:      219     219
+                     pop3:      219     219
+                     smtp:      219     219
+                    total:     1971    1971
+--------------------------------------------------
+fast pattern groups
+                to_server: 9
+                to_client: 9
+--------------------------------------------------
+search engine (ac_bnfa)
+                instances: 18
+                 patterns: 3942
+            pattern chars: 23418
+               num states: 16488
+         num match states: 3528
+             memory scale: KB
+             total memory: 641.531
+           pattern memory: 176.836
+        match list memory: 255.938
+        transition memory: 206.508
+appid: MaxRss diff: 3464
+appid: patterns loaded: 300
+--------------------------------------------------
+afpacket DAQ configured to inline.
+Commencing packet processing
+Retry queue interval is: 200 ms
+++ [0] enp0s3
+^C** caught int signal
+== stopping
+-- [0] enp0s3
+--------------------------------------------------
+Packet Statistics
+--------------------------------------------------
+daq
+                 received: 24024
+                 analyzed: 24022
+                    allow: 23988
+                whitelist: 31
+                blacklist: 3
+                     idle: 5
+                 rx_bytes: 3003503
+--------------------------------------------------
+codec
+                    total: 24022        (100.000%)
+                      arp: 70           (  0.291%)
+                      eth: 24022        (100.000%)
+                    icmp4: 5            (  0.021%)
+                    icmp6: 23           (  0.096%)
+                 icmp6_ip: 7            (  0.029%)
+                     ipv4: 23841        ( 99.247%)
+                     ipv6: 111          (  0.462%)
+            ipv6_hop_opts: 4            (  0.017%)
+                      tcp: 23860        ( 99.326%)
+                      udp: 64           (  0.266%)
+--------------------------------------------------
+Module Statistics
+--------------------------------------------------
+ac_bnfa
+                 searches: 1019
+                  matches: 2016
+                    bytes: 356234
+--------------------------------------------------
+ac_full
+                 searches: 9688
+                  matches: 24544
+                    bytes: 1170851
+--------------------------------------------------
+appid
+                  packets: 23951
+        processed_packets: 23358
+          ignored_packets: 593
+           total_sessions: 1062
+       service_cache_adds: 8
+             bytes_in_use: 1344
+             items_in_use: 8
+--------------------------------------------------
+arp_spoof
+                  packets: 70
+--------------------------------------------------
+back_orifice
+                  packets: 64
+--------------------------------------------------
+binder
+              raw_packets: 663
+                new_flows: 1059
+          service_changes: 1025
+                 inspects: 1722
+--------------------------------------------------
+detection
+                 analyzed: 24022
+            file_searches: 1019
+                   alerts: 2
+             total_alerts: 2
+                   logged: 2
+--------------------------------------------------
+dns
+                  packets: 8
+                 requests: 4
+                responses: 4
+             dns_over_udp: 8
+--------------------------------------------------
+file_id
+              total_files: 1019
+          total_file_data: 356234
+     max_concurrent_files: 1
+--------------------------------------------------
+http_inspect
+                    flows: 1024
+                    scans: 9691
+              reassembles: 9691
+              inspections: 5105
+                 requests: 1024
+                responses: 1019
+             get_requests: 1024
+  max_concurrent_sessions: 785
+              total_bytes: 1027226
+--------------------------------------------------
+ips_actions
+                   reject: 2
+--------------------------------------------------
+normalizer
+        test_tcp_trim_mss: 22
+           test_tcp_block: 12
+--------------------------------------------------
+port_scan
+                  packets: 23952
+                 trackers: 42
+--------------------------------------------------
+search_engine
+               max_queued: 2
+            total_flushed: 2016
+            total_inserts: 2016
+             total_unique: 2016
+     non_qualified_events: 2016
+--------------------------------------------------
+ssl
+                  packets: 8
+                  decoded: 8
+             client_hello: 1
+             server_hello: 1
+              certificate: 1
+              server_done: 3
+      client_key_exchange: 1
+      server_key_exchange: 1
+            change_cipher: 2
+       client_application: 2
+       server_application: 1
+     handshakes_completed: 1
+         sessions_ignored: 1
+  max_concurrent_sessions: 1
+--------------------------------------------------
+stream
+                    flows: 1059
+             total_prunes: 1018
+idle_prunes_proto_timeout: 2
+            closed_prunes: 1016
+       tcp_timeout_prunes: 2
+--------------------------------------------------
+stream_icmp
+                 sessions: 9
+                      max: 9
+                  created: 9
+                 released: 9
+--------------------------------------------------
+stream_tcp
+                 sessions: 1034
+                      max: 1034
+                  created: 1034
+                 released: 1034
+             instantiated: 1034
+                   setups: 1034
+                 restarts: 1025
+         discards_skipped: 12
+              invalid_ack: 11
+                   events: 1
+             syn_trackers: 1028
+            data_trackers: 6
+              segs_queued: 6785
+            segs_released: 6785
+                segs_used: 6195
+          rebuilt_packets: 5126
+            rebuilt_bytes: 1053026
+                     gaps: 11
+          client_cleanups: 4
+          server_cleanups: 1006
+                     syns: 3811
+                 syn_acks: 1037
+                     rsts: 573
+          rsts_ok_rfc5961: 553
+           rsts_in_window: 19
+             rsts_bad_seq: 1
+                     fins: 2049
+        partial_fallbacks: 1
+                 max_segs: 98
+                max_bytes: 8272
+         full_retransmits: 962
+--------------------------------------------------
+stream_udp
+                 sessions: 16
+                      max: 16
+                  created: 19
+                 released: 19
+                 timeouts: 3
+              total_bytes: 8665
+--------------------------------------------------
+wizard
+                tcp_scans: 1140
+                 tcp_hits: 1025
+               tcp_misses: 1
+                udp_scans: 12
+               udp_misses: 12
+--------------------------------------------------
+Appid Statistics
+--------------------------------------------------
+detected apps and services
+              Application: Services   Clients    Users      Payloads   Misc       Referred
+                  unknown: 1193       1028       0          1025       0          0
+--------------------------------------------------
+Summary Statistics
+--------------------------------------------------
+process
+                  signals: 1
+--------------------------------------------------
+timing
+                  runtime: 00:01:39
+                  seconds: 99.468632
+                 pkts/sec: 242
+--------------------------------------------------
+rule profile (all, sorted by total_time)
+#       gid   sid rev    checks matches alerts time (us) avg/check avg/match avg/non-match timeouts suspends rule_time (%)
+=       ===   === ===    ====== ======= ====== ========= ========= ========= ============= ======== ======== =============
+1         4   167   1       997       0      0      4475         4         0             4        0        0       0.00450
+2         4   173   1       997       0      0      4475         4         0             4        0        0       0.00450
+3         4   172   1       997       0      0      4475         4         0             4        0        0       0.00450
+4         4   169   1       997       0      0      4475         4         0             4        0        0       0.00450
+5         4   170   1       997       0      0      4475         4         0             4        0        0       0.00450
+6         4   171   1       997       0      0      4475         4         0             4        0        0       0.00450
+7         4   166   1       997       0      0      4475         4         0             4        0        0       0.00450
+8         4   168   1       997       0      0      4475         4         0             4        0        0       0.00450
+9         4   178   1       997       0      0      2338         2         0             2        0        0       0.00235
+10        4   179   1       997       0      0      2338         2         0             2        0        0       0.00235
+11        4   177   1       997       0      0      2338         2         0             2        0        0       0.00235
+12        4   194   1       997       0      0      2338         2         0             2        0        0       0.00235
+13        4   180   1       997       0      0      2338         2         0             2        0        0       0.00235
+14        4   174   1       997       0      0      2338         2         0             2        0        0       0.00235
+15        4   176   1       997       0      0      2338         2         0             2        0        0       0.00235
+16        4   175   1       997       0      0      2338         2         0             2        0        0       0.00235
+17        4   128   1        22       0      0        63         2         0             2        0        0       0.00006
+o")~   Snort exiting
+snort@snort:~$

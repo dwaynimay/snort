@@ -1,0 +1,5 @@
+12/15-01:51:04.133826 [reset] [**] [129:15:1]  <enp0s3> "(stream_tcp) reset outside window" [**] [Priority: 3] {TCP} 192.168.18.21:22 -> 192.168.18.24:60908
+12/15-01:51:04.163707 [reset] [**] [129:15:1]  <enp0s3> "(stream_tcp) reset outside window" [**] [Priority: 3] {TCP} 192.168.18.21:22 -> 192.168.18.24:60932
+12/15-01:51:06.221358 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.246 -> 224.0.0.22
+12/15-01:51:06.795840 [reset] [**] [129:15:1]  <enp0s3> "(stream_tcp) reset outside window" [**] [Priority: 3] {TCP} 192.168.18.21:22 -> 192.168.18.24:32846
+12/15-01:51:09.128235 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.246 -> 224.0.0.22

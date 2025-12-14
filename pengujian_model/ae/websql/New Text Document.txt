@@ -1,0 +1,713 @@
+PS C:\Users\HP> ssh snort@192.168.18.21
+snort@192.168.18.21's password:
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-163-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon Dec 15 02:46:20 AM WIB 2025
+
+  System load:             1.67
+  Usage of /:              16.4% of 36.35GB
+  Memory usage:            6%
+  Swap usage:              0%
+  Processes:               154
+  Users logged in:         0
+  IPv4 address for enp0s3: 192.168.18.21
+  IPv6 address for enp0s3: 2404:8000:1005:1a6e:a00:27ff:fed7:5f75
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+10 updates can be applied immediately.
+8 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+1 additional security update can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+New release '24.04.3 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Mon Dec 15 02:46:31 2025 from 192.168.18.236
+snort@snort:~$ sudo snort -c /usr/local/etc/snort/snort.lua --talos --lua 'snort_ml_engine = { http_param_model = "/usr/local/etc/snort/models/ae.tflite" }; snort_ml = { client_body_depth = -1, http_param_threshold = 0.95 }; trace = { modules = { snort_ml = {all =1 } } };' -A alert_fast -l /var/log/snort -s 65535 -k none -Q --daq afpacket -i enp0s3
+[sudo] password for snort:
+--------------------------------------------------
+o")~   Snort++ 3.10.0.0
+--------------------------------------------------
+Loading /usr/local/etc/snort/snort.lua:
+Loading snort_defaults.lua:
+Finished snort_defaults.lua:
+Loading talos.lua:
+Finished talos.lua:
+        snort
+        ssh
+        snort_ml_engine
+        host_cache
+        pop
+        so_proxy
+        stream_tcp
+        cip
+        mms
+        smtp
+        dce_http_server
+        gtp_inspect
+        profiler
+        packets
+        dce_http_proxy
+        alert_talos
+        alert_fast
+        reject
+        ips
+        hosts
+        stream_icmp
+        binder
+        normalizer
+        wizard
+        appid
+        js_norm
+        file_id
+        http2_inspect
+        http_inspect
+        ftp_data
+        stream_udp
+        ftp_server
+        port_scan
+        search_engine
+        snort_ml
+        dce_tcp
+        dce_smb
+        iec104
+        telnet
+        ssl
+        sip
+        rpc_decode
+        netflow
+        modbus
+        host_tracker
+        stream_user
+        stream_ip
+        process
+        back_orifice
+        classifications
+        dnp3
+        opcua
+        active
+        trace
+        ftp_client
+        decode
+        alerts
+        stream
+        references
+        daq
+        arp_spoof
+        output
+        network
+        dns
+        dce_udp
+        imap
+        file_policy
+        s7commplus
+        stream_file
+Finished /usr/local/etc/snort/snort.lua:
+Loading file_id.rules_file:
+Loading file_magic.rules:
+Finished file_magic.rules:
+Finished file_id.rules_file:
+--------------------------------------------------
+ips policies rule stats
+              id  loaded  shared enabled    file
+               0     859       0     859    /usr/local/etc/snort/snort.lua
+--------------------------------------------------
+rule counts
+       total rules loaded: 859
+               text rules: 219
+            builtin rules: 640
+            option chains: 859
+            chain headers: 1
+--------------------------------------------------
+port rule counts
+             tcp     udp    icmp      ip
+     any     640       0       0       0
+   total     640       0       0       0
+--------------------------------------------------
+service rule counts          to-srv  to-cli
+                   dcerpc:      219     219
+                 ftp-data:      219     219
+                     http:      219     219
+                    http2:      219     219
+                    http3:      219     219
+                     imap:      219     219
+              netbios-ssn:      219     219
+                     pop3:      219     219
+                     smtp:      219     219
+                    total:     1971    1971
+--------------------------------------------------
+fast pattern groups
+                to_server: 9
+                to_client: 9
+--------------------------------------------------
+search engine (ac_bnfa)
+                instances: 18
+                 patterns: 3942
+            pattern chars: 23418
+               num states: 16488
+         num match states: 3528
+             memory scale: KB
+             total memory: 641.531
+           pattern memory: 176.836
+        match list memory: 255.938
+        transition memory: 206.508
+appid: MaxRss diff: 3472
+appid: patterns loaded: 300
+--------------------------------------------------
+afpacket DAQ configured to inline.
+Commencing packet processing
+Retry queue interval is: 200 ms
+++ [0] enp0s3
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): id=6&Submit=Submit
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+^C** caught int signal
+== stopping
+-- [0] enp0s3
+--------------------------------------------------
+Packet Statistics
+--------------------------------------------------
+daq
+                 received: 9575
+                 analyzed: 9572
+                 injected: 357
+                    allow: 8570
+                blacklist: 1002
+                     idle: 5
+                 rx_bytes: 1079192
+--------------------------------------------------
+codec
+                    total: 9572         (100.000%)
+                      arp: 3842         ( 40.138%)
+                      eth: 9572         (100.000%)
+                    icmp4: 62           (  0.648%)
+                    icmp6: 2357         ( 24.624%)
+                     igmp: 10           (  0.104%)
+                     ipv4: 3235         ( 33.796%)
+                     ipv6: 2495         ( 26.066%)
+            ipv6_hop_opts: 26           (  0.272%)
+                      tcp: 3067         ( 32.041%)
+                      udp: 234          (  2.445%)
+--------------------------------------------------
+Module Statistics
+--------------------------------------------------
+ac_full
+                 searches: 1179
+                  matches: 1155
+                    bytes: 54832
+--------------------------------------------------
+active
+                  injects: 357
+--------------------------------------------------
+appid
+                  packets: 4734
+        processed_packets: 4721
+          ignored_packets: 13
+           total_sessions: 233
+       service_cache_adds: 9
+             bytes_in_use: 1512
+             items_in_use: 9
+--------------------------------------------------
+arp_spoof
+                  packets: 3842
+--------------------------------------------------
+back_orifice
+                  packets: 234
+--------------------------------------------------
+binder
+              raw_packets: 3855
+                new_flows: 197
+          service_changes: 120
+                 inspects: 4052
+--------------------------------------------------
+detection
+                 analyzed: 9572
+                   alerts: 133
+             total_alerts: 133
+                   logged: 133
+--------------------------------------------------
+dns
+                  packets: 4
+                 requests: 2
+                responses: 2
+             dns_over_udp: 4
+--------------------------------------------------
+http_inspect
+                    flows: 119
+                    scans: 238
+              reassembles: 238
+              inspections: 238
+                 requests: 119
+             get_requests: 119
+  max_concurrent_sessions: 1
+              total_bytes: 62765
+--------------------------------------------------
+ips_actions
+                   reject: 133
+--------------------------------------------------
+port_scan
+                  packets: 5730
+                 trackers: 85
+--------------------------------------------------
+snort_ml
+               uri_alerts: 119
+                uri_bytes: 2142
+--------------------------------------------------
+snort_ml_engine
+              libml_calls: 119
+--------------------------------------------------
+ssl
+                  packets: 14
+                  decoded: 14
+             client_hello: 1
+             server_hello: 1
+            change_cipher: 2
+       client_application: 5
+       server_application: 8
+  max_concurrent_sessions: 1
+--------------------------------------------------
+stream
+                    flows: 197
+             total_prunes: 28
+idle_prunes_proto_timeout: 23
+            closed_prunes: 5
+        ip_timeout_prunes: 1
+       udp_timeout_prunes: 8
+      icmp_timeout_prunes: 14
+--------------------------------------------------
+stream_icmp
+                 sessions: 42
+                      max: 42
+                  created: 42
+                 released: 42
+--------------------------------------------------
+stream_ip
+                 sessions: 2
+                      max: 2
+                  created: 2
+                 released: 2
+              total_bytes: 32
+--------------------------------------------------
+stream_tcp
+                 sessions: 130
+                      max: 130
+                  created: 130
+                 released: 130
+                 timeouts: 2
+             instantiated: 128
+                   setups: 130
+                 restarts: 120
+             syn_trackers: 120
+            data_trackers: 10
+              segs_queued: 1131
+            segs_released: 1131
+                segs_used: 1008
+          rebuilt_packets: 488
+            rebuilt_bytes: 176940
+          client_cleanups: 7
+          server_cleanups: 6
+                     syns: 120
+                 syn_acks: 120
+                     rsts: 3
+          rsts_ok_rfc5961: 3
+                     fins: 4
+        partial_fallbacks: 2
+                 max_segs: 109
+                max_bytes: 16664
+         full_retransmits: 1
+--------------------------------------------------
+stream_udp
+                 sessions: 23
+                      max: 23
+                  created: 59
+                 released: 59
+                 timeouts: 36
+              total_bytes: 33461
+--------------------------------------------------
+wizard
+                tcp_scans: 341
+                 tcp_hits: 120
+               tcp_misses: 2
+                udp_scans: 21
+               udp_misses: 21
+--------------------------------------------------
+Appid Statistics
+--------------------------------------------------
+detected apps and services
+              Application: Services   Clients    Users      Payloads   Misc       Referred
+                  unknown: 202        121        0          120        0          0
+--------------------------------------------------
+Summary Statistics
+--------------------------------------------------
+process
+                  signals: 1
+--------------------------------------------------
+timing
+                  runtime: 00:07:34
+                  seconds: 454.685941
+                 pkts/sec: 21
+o")~   Snort exiting
+snort@snort:~$

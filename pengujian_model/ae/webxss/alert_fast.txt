@@ -1,0 +1,4 @@
+12/15-02:40:39.361291 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.24:59438 -> 192.168.18.21:80
+12/15-02:40:47.164799 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.23 -> 224.0.0.22
+12/15-02:40:50.137475 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.23 -> 224.0.0.22
+12/15-02:41:02.116705 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.24:34252 -> 192.168.18.21:80

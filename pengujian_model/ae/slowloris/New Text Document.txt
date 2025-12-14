@@ -1,0 +1,266 @@
+0:snort_ml:classifier:1: input (query): 1367
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 1718
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 178
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 453
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 1841
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 1689
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 1896
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 479
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 1221
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 794
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 343
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 1172
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+^C** caught int signal
+== stopping
+-- [0] enp0s3
+--------------------------------------------------
+Packet Statistics
+--------------------------------------------------
+daq
+                 received: 12285
+                 analyzed: 12280
+                  dropped: 142
+                 injected: 1050
+                    allow: 9978
+                whitelist: 20
+                blacklist: 2282
+                     idle: 15
+                 rx_bytes: 1394546
+--------------------------------------------------
+codec
+                    total: 12280        (100.000%)
+                      arp: 48           (  0.391%)
+                      eth: 12280        (100.000%)
+                    icmp4: 11           (  0.090%)
+                    icmp6: 9            (  0.073%)
+                     igmp: 5            (  0.041%)
+                     ipv4: 12197        ( 99.324%)
+                     ipv6: 35           (  0.285%)
+            ipv6_hop_opts: 7            (  0.057%)
+                      tcp: 12151        ( 98.950%)
+                      udp: 56           (  0.456%)
+--------------------------------------------------
+Module Statistics
+--------------------------------------------------
+ac_bnfa
+                 searches: 300
+                  matches: 600
+                    bytes: 97500
+--------------------------------------------------
+ac_full
+                 searches: 3276
+                  matches: 2980
+                    bytes: 341386
+--------------------------------------------------
+active
+                  injects: 1050
+--------------------------------------------------
+appid
+                  packets: 9952
+        processed_packets: 9952
+           total_sessions: 679
+       service_cache_adds: 9
+             bytes_in_use: 1512
+             items_in_use: 9
+--------------------------------------------------
+arp_spoof
+                  packets: 48
+--------------------------------------------------
+back_orifice
+                  packets: 56
+--------------------------------------------------
+binder
+              raw_packets: 48
+                new_flows: 678
+          service_changes: 651
+                 inspects: 726
+--------------------------------------------------
+detection
+                 analyzed: 12280
+            file_searches: 300
+                   alerts: 656
+             total_alerts: 656
+                   logged: 656
+--------------------------------------------------
+dns
+                  packets: 4
+                 requests: 2
+                responses: 2
+             dns_over_udp: 4
+--------------------------------------------------
+file_id
+              total_files: 300
+          total_file_data: 97500
+     max_concurrent_files: 1
+--------------------------------------------------
+http_inspect
+                    flows: 650
+                    scans: 4050
+              reassembles: 4050
+              inspections: 2200
+                 requests: 650
+                responses: 300
+             get_requests: 650
+  max_concurrent_sessions: 500
+              total_bytes: 291373
+--------------------------------------------------
+ips_actions
+                   reject: 656
+--------------------------------------------------
+port_scan
+                  packets: 12232
+                 trackers: 38
+--------------------------------------------------
+search_engine
+               max_queued: 2
+            total_flushed: 600
+            total_inserts: 600
+             total_unique: 600
+     non_qualified_events: 600
+--------------------------------------------------
+snort_ml
+               uri_alerts: 650
+                uri_bytes: 2274
+--------------------------------------------------
+snort_ml_engine
+              libml_calls: 650
+--------------------------------------------------
+ssl
+                  packets: 6
+                  decoded: 6
+             client_hello: 1
+             server_hello: 1
+              certificate: 1
+              server_done: 3
+      client_key_exchange: 1
+      server_key_exchange: 1
+            change_cipher: 2
+       client_application: 1
+       server_application: 1
+     handshakes_completed: 1
+         sessions_ignored: 1
+  max_concurrent_sessions: 1
+--------------------------------------------------
+stream
+                    flows: 678
+             total_prunes: 302
+            closed_prunes: 302
+--------------------------------------------------
+stream_icmp
+                 sessions: 5
+                      max: 5
+                  created: 5
+                 released: 5
+--------------------------------------------------
+stream_ip
+                 sessions: 1
+                      max: 1
+                  created: 1
+                 released: 1
+              total_bytes: 16
+--------------------------------------------------
+stream_tcp
+                 sessions: 656
+                      max: 656
+                  created: 656
+                 released: 656
+             instantiated: 656
+                   setups: 656
+                 restarts: 651
+             syn_trackers: 651
+            data_trackers: 5
+              segs_queued: 3811
+            segs_released: 3811
+                segs_used: 1164
+          rebuilt_packets: 2258
+            rebuilt_bytes: 344012
+                     gaps: 1
+          client_cleanups: 5
+          server_cleanups: 354
+                  closing: 650
+                     syns: 651
+                 syn_acks: 651
+                     rsts: 300
+          rsts_ok_rfc5961: 300
+                     fins: 653
+        partial_fallbacks: 1
+                 max_segs: 147
+                max_bytes: 53788
+ flush_on_asymmetric_flow: 350
+--------------------------------------------------
+stream_udp
+                 sessions: 16
+                      max: 16
+                  created: 17
+                 released: 17
+                 timeouts: 1
+              total_bytes: 7468
+--------------------------------------------------
+wizard
+                tcp_scans: 772
+                 tcp_hits: 651
+               tcp_misses: 1
+                udp_scans: 14
+               udp_misses: 14
+--------------------------------------------------
+Appid Statistics
+--------------------------------------------------
+detected apps and services
+              Application: Services   Clients    Users      Payloads   Misc       Referred
+                  unknown: 674        652        0          303        0          0
+--------------------------------------------------
+Summary Statistics
+--------------------------------------------------
+process
+                  signals: 1
+--------------------------------------------------
+timing
+                  runtime: 00:01:14
+                  seconds: 74.018059
+                 pkts/sec: 166
+--------------------------------------------------
+rule profile (all, sorted by total_time)
+#       gid   sid rev    checks matches alerts time (us) avg/check avg/match avg/non-match timeouts suspends rule_time (%)
+=       ===   === ===    ====== ======= ====== ========= ========= ========= ============= ======== ======== =============
+1         4   166   1       300       0      0      1744         5         0             5        0        0       0.00236
+2         4   170   1       300       0      0      1744         5         0             5        0        0       0.00236
+3         4   167   1       300       0      0      1744         5         0             5        0        0       0.00236
+4         4   172   1       300       0      0      1744         5         0             5        0        0       0.00236
+5         4   169   1       300       0      0      1744         5         0             5        0        0       0.00236
+6         4   173   1       300       0      0      1744         5         0             5        0        0       0.00236
+7         4   168   1       300       0      0      1744         5         0             5        0        0       0.00236
+8         4   171   1       300       0      0      1744         5         0             5        0        0       0.00236
+9         4   174   1       300       0      0       372         1         0             1        0        0       0.00050
+10        4   180   1       300       0      0       372         1         0             1        0        0       0.00050
+11        4   194   1       300       0      0       372         1         0             1        0        0       0.00050
+12        4   175   1       300       0      0       372         1         0             1        0        0       0.00050
+13        4   178   1       300       0      0       372         1         0             1        0        0       0.00050
+14        4   177   1       300       0      0       372         1         0             1        0        0       0.00050
+15        4   176   1       300       0      0       372         1         0             1        0        0       0.00050
+16        4   179   1       300       0      0       372         1         0             1        0        0       0.00050
+o")~   Snort exiting
+snort@snort:~$
