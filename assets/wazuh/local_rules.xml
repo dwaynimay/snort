@@ -2,18 +2,199 @@ lokasi rules wazuh untuk snort: /var/ossec/ruleset/rules/0240-ids_rules.xml
 lokasi local_rules: /var/ossec/etc/rules/local_rules.xml
 perlu ada settingan tambahan di local_rules di bawah sendiri
 
-<group name="snort_ml,ids,">
-  <rule id="100100" level="7">
-    <decoded_as>snort_ml_decoder</decoded_as>
-    <match>snort_ml</match>
-    <description>Snort ML Detection: Potential threat detected by ML-enhanced Snort</description>
-    <group>ml_alert,ids,</group>
+<group name="local,syslog,sshd,">
+  <rule id="100001" level="5">
+    <if_sid>5716</if_sid>
+    <srcip>1.1.1.1</srcip>
+    <description>sshd: authentication failed from IP 1.1.1.1.</description>
+    <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
   </rule>
+</group>
+    
+<group name="model_ae">
+    <rule id="100100" level="10">
+      <match>ae_ftppatator</match>
+      <description>Snort ML Detection: terdeteksi serangan ftppatator</description>
+    </rule>
 
-  <rule id="100101" level="10">
-    <if_sid>100100</if_sid>
-    <match>Neural Network Based Exploit Detection</match>
-    <description>High Confidence: ML Neural Network Exploit Detection</description>
-    <group>ml_high_confidence,</group>
-  </rule>
+    <rule id="100101" level="10">
+      <match>ae_goldeneye</match>
+      <description>Snort ML Detection: terdeteksi serangan goldeneye</description>
+    </rule>
+
+    <rule id="100102" level="10">
+      <match>ae_nmap</match>
+      <description>Snort ML Detection: terdeteksi serangan nmap</description>
+    </rule>
+
+    <rule id="100103" level="10">
+      <match>ae_slowhttp</match>
+      <description>Snort ML Detection: terdeteksi serangan slowhttp</description>
+    </rule>
+    
+    <rule id="100104" level="10">
+      <match>ae_slowloris</match>
+      <description>Snort ML Detection: terdeteksi serangan slowloris</description>
+    </rule>
+
+    <rule id="100105" level="10">
+      <match>ae_sshpatator</match>
+      <description>Snort ML Detection: terdeteksi serangan sshpatator</description>
+    </rule>
+
+    <rule id="100106" level="10">
+      <match>ae_webbrute</match>
+      <description>Snort ML Detection: terdeteksi serangan webbrute</description>
+    </rule>
+
+    <rule id="100107" level="10">
+      <match>ae_websql</match>
+      <description>Snort ML Detection: terdeteksi serangan websql</description>
+    </rule>
+
+    <rule id="100108" level="10">
+      <match>ae_webxss</match>
+      <description>Snort ML Detection: terdeteksi serangan webxss</description>
+    </rule>
+</group>
+
+<group name="model_mlp">
+    <rule id="100109" level="10">
+      <match>mlp_ftppatator</match>
+      <description>Snort ML Detection: terdeteksi serangan ftppatator</description>
+    </rule>
+
+    <rule id="100110" level="10">
+      <match>mlp_goldeneye</match>
+      <description>Snort ML Detection: terdeteksi serangan goldeneye</description>
+    </rule>
+
+    <rule id="100111" level="10">
+      <match>mlp_nmap</match>
+      <description>Snort ML Detection: terdeteksi serangan nmap</description>
+    </rule>
+
+    <rule id="100112" level="10">
+      <match>mlp_slowhttp</match>
+      <description>Snort ML Detection: terdeteksi serangan slowhttp</description>
+    </rule>
+    
+    <rule id="100113" level="10">
+      <match>mlp_slowloris</match>
+      <description>Snort ML Detection: terdeteksi serangan slowloris</description>
+    </rule>
+
+    <rule id="100114" level="10">
+      <match>mlp_sshpatator</match>
+      <description>Snort ML Detection: terdeteksi serangan sshpatator</description>
+    </rule>
+
+    <rule id="100115" level="10">
+      <match>mlp_webbrute</match>
+      <description>Snort ML Detection: terdeteksi serangan webbrute</description>
+    </rule>
+
+    <rule id="100116" level="10">
+      <match>mlp_websql</match>
+      <description>Snort ML Detection: terdeteksi serangan websql</description>
+    </rule>
+
+    <rule id="100117" level="10">
+      <match>mlp_webxss</match>
+      <description>Snort ML Detection: terdeteksi serangan webxss</description>
+    </rule>
+</group>
+
+<group name="model_rf">
+    <rule id="100118" level="10">
+      <match>mlp_ftppatator</match>
+      <description>Snort ML Detection: terdeteksi serangan ftppatator</description>
+    </rule>
+
+    <rule id="100119" level="10">
+      <match>mlp_goldeneye</match>
+      <description>Snort ML Detection: terdeteksi serangan goldeneye</description>
+    </rule>
+
+    <rule id="100120" level="10">
+      <match>mlp_nmap</match>
+      <description>Snort ML Detection: terdeteksi serangan nmap</description>
+    </rule>
+
+    <rule id="100121" level="10">
+      <match>mlp_slowhttp</match>
+      <description>Snort ML Detection: terdeteksi serangan slowhttp</description>
+    </rule>
+    
+    <rule id="100122" level="10">
+      <match>mlp_slowloris</match>
+      <description>Snort ML Detection: terdeteksi serangan slowloris</description>
+    </rule>
+
+    <rule id="100123" level="10">
+      <match>mlp_sshpatator</match>
+      <description>Snort ML Detection: terdeteksi serangan sshpatator</description>
+    </rule>
+
+    <rule id="100124" level="10">
+      <match>mlp_webbrute</match>
+      <description>Snort ML Detection: terdeteksi serangan webbrute</description>
+    </rule>
+
+    <rule id="100125" level="10">
+      <match>mlp_websql</match>
+      <description>Snort ML Detection: terdeteksi serangan websql</description>
+    </rule>
+
+    <rule id="100126" level="10">
+      <match>mlp_webxss</match>
+      <description>Snort ML Detection: terdeteksi serangan webxss</description>
+    </rule>
+</group>
+
+<group name="model_lgbm">
+    <rule id="100127" level="10">
+      <match>lgbm_ftppatator</match>
+      <description>Snort ML Detection: terdeteksi serangan ftppatator</description>
+    </rule>
+
+    <rule id="100128" level="10">
+      <match>lgbm_goldeneye</match>
+      <description>Snort ML Detection: terdeteksi serangan goldeneye</description>
+    </rule>
+
+    <rule id="100129" level="10">
+      <match>lgbm_nmap</match>
+      <description>Snort ML Detection: terdeteksi serangan nmap</description>
+    </rule>
+
+    <rule id="100130" level="10">
+      <match>lgbm_slowhttp</match>
+      <description>Snort ML Detection: terdeteksi serangan slowhttp</description>
+    </rule>
+    
+    <rule id="100131" level="10">
+      <match>lgbm_slowloris</match>
+      <description>Snort ML Detection: terdeteksi serangan slowloris</description>
+    </rule>
+
+    <rule id="100132" level="10">
+      <match>lgbm_sshpatator</match>
+      <description>Snort ML Detection: terdeteksi serangan sshpatator</description>
+    </rule>
+
+    <rule id="100133" level="10">
+      <match>lgbm_webbrute</match>
+      <description>Snort ML Detection: terdeteksi serangan webbrute</description>
+    </rule>
+
+    <rule id="100134" level="10">
+      <match>lgbm_websql</match>
+      <description>Snort ML Detection: terdeteksi serangan websql</description>
+    </rule>
+
+    <rule id="100135" level="10">
+      <match>lgbm_webxss</match>
+      <description>Snort ML Detection: terdeteksi serangan webxss</description>
+    </rule>
 </group>
