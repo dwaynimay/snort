@@ -1,0 +1,11 @@
+attack,scenario,cpu_mean,cpu_max,ram_mean,ram_max,disk_mean,disk_max,net_mean,net_max,section,metric,value
+goldeneye,ips,24.79,47.23,3263.26,3290.97,477.76,16616.5,57.11,523.7,table_compare,,
+goldeneye,no_ips,4.37,18.64,3014.19,3075.16,80.8,1144.88,15.02,279.71,table_compare,,
+,,,,,,,,,,delta_absolute,cpu_mean,20.424210121012102
+,,,,,,,,,,delta_absolute,ram_mean,249.07351815181528
+,,,,,,,,,,delta_absolute,disk_mean,396.9612959295929
+,,,,,,,,,,delta_absolute,net_mean,42.09308360836084
+,,,,,,,,,,delta_percent,cpu_mean,467.3838187017904
+,,,,,,,,,,delta_percent,ram_mean,8.2633781894433
+,,,,,,,,,,delta_percent,disk_mean,491.3182328721443
+,,,,,,,,,,delta_percent,net_mean,280.3189600920755
