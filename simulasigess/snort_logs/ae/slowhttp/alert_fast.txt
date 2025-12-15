@@ -1,0 +1,1 @@
+12/13-19:23:48.590666 [reset] [**] [129:15:1]  </home/snort/snort/pengujian/slowhttp/serangan_A_fix.pcap> "(stream_tcp) reset outside window" [**] [Priority: 3] {TCP} 192.168.18.24:52838 -> 192.168.18.21:80

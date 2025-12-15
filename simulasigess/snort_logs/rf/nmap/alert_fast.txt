@@ -1,0 +1,1 @@
+12/13-18:09:11.290044 [reset] [**] [122:1:1]  </home/snort/snort/pengujian/nmap/serangan_A_fix.pcap> "(port_scan) TCP portscan" [**] [Priority: 3] {TCP} 192.168.18.24:34812 -> 192.168.18.21:3306

@@ -1,0 +1,2 @@
+12/14-14:02:00.787682 [reset] [**] [411:1:1]  </home/snort/snort/pengujian/webxss/serangan_A_fix.pcap> "(mlp_webxss) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.24:59438 -> 192.168.18.21:80
+12/14-14:02:23.543078 [reset] [**] [411:1:1]  </home/snort/snort/pengujian/webxss/serangan_A_fix.pcap> "(mlp_webxss) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.24:34252 -> 192.168.18.21:80

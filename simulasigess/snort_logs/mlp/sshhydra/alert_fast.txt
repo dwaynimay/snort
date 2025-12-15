@@ -1,0 +1,3 @@
+12/13-22:18:46.188657 [reset] [**] [129:15:1]  </home/snort/snort/pengujian/sshhydra/serangan_A_fix.pcap> "(stream_tcp) reset outside window" [**] [Priority: 3] {TCP} 192.168.18.21:22 -> 192.168.18.24:60908
+12/13-22:18:46.218067 [reset] [**] [129:15:1]  </home/snort/snort/pengujian/sshhydra/serangan_A_fix.pcap> "(stream_tcp) reset outside window" [**] [Priority: 3] {TCP} 192.168.18.21:22 -> 192.168.18.24:60932
+12/13-22:18:48.850779 [reset] [**] [129:15:1]  </home/snort/snort/pengujian/sshhydra/serangan_A_fix.pcap> "(stream_tcp) reset outside window" [**] [Priority: 3] {TCP} 192.168.18.21:22 -> 192.168.18.24:32846
