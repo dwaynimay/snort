@@ -1,0 +1,2 @@
+12/15-23:26:36.803321 [reset] [**] [4:63:1]  <serangan_pengujian.pcap> "Portable Network Graphics file" [**] [Priority: 0] {TCP} 192.168.1.16:80 -> 192.168.1.5:31942
+12/15-23:26:37.224890 [reset] [**] [4:63:1]  <serangan_pengujian.pcap> "Portable Network Graphics file" [**] [Priority: 0] {TCP} 192.168.1.16:80 -> 192.168.1.5:31949

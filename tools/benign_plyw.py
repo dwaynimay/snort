@@ -4,11 +4,12 @@ from playwright.sync_api import sync_playwright
 
 # --- KONFIGURASI ---
 # Ganti dengan IP Target DVWA Anda
-TARGET_IP = "192.168.18.21"
+TARGET_IP = "192.168.1.16"
 BASE_URL = f"http://{TARGET_IP}/dvwa/login.php"
 USERNAME = "admin"
 PASSWORD = "password"
 
+max_actions = 30
 # Daftar Menu SESUAI GAMBAR YANG ANDA KIRIM
 # (Saya hapus 'Logout' agar bot tidak keluar sendiri)
 MENU_ITEMS = [
@@ -75,10 +76,17 @@ def run_benign_traffic():
             action_count = 0
             while True:
                 # Pilih satu menu secara acak dari daftar
+                if action_count >= max_actions:
+                    print(
+                        f"\n[DONE] Mencapai batas {max_actions} aksi. Selesai.")
+                    break
+
                 menu_text = random.choice(MENU_ITEMS)
 
                 try:
-                    print(f"[{action_count}] Mengklik menu: {menu_text}")
+                    action_count += 1
+                    print(
+                        f"[{action_count}/{max_actions}] Mengklik menu: {menu_text}")
 
                     # Playwright mencari tombol berdasarkan teks di sidebar
                     page.click(f"text={menu_text}", timeout=3000)
