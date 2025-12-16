@@ -1,6 +1,6 @@
 attack,scenario,cpu_mean,cpu_max,ram_mean,ram_max,disk_mean,disk_max,net_mean,net_max,section,metric,value
-goldeneye,ips,21.94,33.01,3271.05,3282.32,118.67,17813.73,3.89,34.49,table_compare,,
-goldeneye,no_ips,3.01,6.37,3015.32,3019.4,37.14,314.01,2.12,36.85,table_compare,,
+websql,ips,21.94,33.01,3271.05,3282.32,118.67,17813.73,3.89,34.49,table_compare,,
+websql,no_ips,3.01,6.37,3015.32,3019.4,37.14,314.01,2.12,36.85,table_compare,,
 ,,,,,,,,,,delta_absolute,cpu_mean,18.929242603159945
 ,,,,,,,,,,delta_absolute,ram_mean,255.73129768776562
 ,,,,,,,,,,delta_absolute,disk_mean,81.53436045782894
