@@ -35,7 +35,7 @@ for model in "${MODELS[@]}"; do
 
     MODEL_PATH="${MODEL_DIR}/${model}.tflite"
     PCAP_FILE="${PCAP_BASE}/${attack}/serangan_A_fix.pcap"
-    LOG_DIR="${LOG_BASE}/${model}/${attack}"
+    LOG_DIR="${LOG_BASE}"
 
     echo "[INFO] Model  : $model"
     echo "[INFO] Attack : $attack"
