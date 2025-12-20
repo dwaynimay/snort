@@ -2,10 +2,8 @@
 
 # Interval pengambilan data (detik)
 INTERVAL=1
-
 # Nama file log CSV dengan timestamp
 LOGFILE="hardware_log_$(date +%Y%m%d_%H%M%S).csv"
-
 # Asumsi ukuran sektor disk (byte) - mayoritas 512
 SECTOR_SIZE=512
 
@@ -20,15 +18,12 @@ echo "Kolom: timestamp,cpu_idle_pct,ram_available_mb,disk_read_kbs,disk_write_kb
 trap 'echo; echo "Stop logging. Log tersimpan di $LOGFILE"; exit 0' INT
 
 # --- Fungsi bantu ---
-
 get_cpu_times() {
   # Baca baris pertama 'cpu' dari /proc/stat
   # Format: cpu  user nice system idle iowait irq softirq steal guest guest_nice
   read -r _ user nice system idle iowait irq softirq steal guest guest_nice < /proc/stat
-
   # Total waktu (semua state)
   local total=$((user + nice + system + idle + iowait + irq + softirq + steal))
-
   echo "$idle $total"
 }
 
@@ -78,7 +73,6 @@ now_seconds() {
 }
 
 # --- Inisialisasi: ambil sample awal ---
-
 read prev_idle prev_total <<< "$(get_cpu_times)"
 read prev_read_sectors prev_write_sectors <<< "$(get_disk_sectors)"
 read prev_rx_bytes prev_tx_bytes <<< "$(get_net_bytes)"
