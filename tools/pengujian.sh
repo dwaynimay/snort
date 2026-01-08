@@ -31,6 +31,10 @@ ip link set $BRIDGE up
 ip link set $VETH0 master $BRIDGE
 ip link set $VETH1 master $BRIDGE
 
+sudo ip link set veth0 mtu 9000
+sudo ip link set veth1 mtu 9000
+sudo ip link set br0 mtu 9000
+
 echo "[*] Loading br_netfilter kernel module..."
 modprobe br_netfilter || {
   echo "[!] Failed to load br_netfilter module"
@@ -41,8 +45,6 @@ echo "[*] Enabling bridge netfilter (CRITICAL)..."
 sysctl -w net.bridge.bridge-nf-call-iptables=1 >/dev/null
 sysctl -w net.bridge.bridge-nf-call-ip6tables=1 >/dev/null
 
-echo "[*] Increasing NFQUEUE buffer..."
-sysctl -w net.netfilter.nf_queue_maxlen=4096 >/dev/null
 
 echo "[*] Cleaning old iptables NFQUEUE rules..."
 iptables -D FORWARD -j NFQUEUE --queue-num $QUEUE_NUM 2>/dev/null || true
