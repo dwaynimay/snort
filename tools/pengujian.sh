@@ -31,6 +31,12 @@ ip link set $BRIDGE up
 ip link set $VETH0 master $BRIDGE
 ip link set $VETH1 master $BRIDGE
 
+echo "[*] Loading br_netfilter kernel module..."
+modprobe br_netfilter || {
+  echo "[!] Failed to load br_netfilter module"
+  exit 1
+}
+
 echo "[*] Enabling bridge netfilter (CRITICAL)..."
 sysctl -w net.bridge.bridge-nf-call-iptables=1 >/dev/null
 sysctl -w net.bridge.bridge-nf-call-ip6tables=1 >/dev/null
