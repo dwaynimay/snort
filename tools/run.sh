@@ -18,11 +18,11 @@ tcpdump -i enp0s3 -s 0 -nn "host 192.168.1.21 and host 192.168.1.18" -w "log_pac
 TCPDUMP_PID=$!
 
 echo "--- [3] Menjalankan Script Hardware Log Anda ---"
-if [ -f ~/snort/tools/log_hardware.sh ]; then
+if [ -f log_hardware.sh ]; then
     # Menjalankan script Anda. Karena script Anda sudah pakai 'tee' dan punya 
     # nama file sendiri, kita jalankan saja di background.
     # > /dev/null agar output terminal script hardware tidak menumpuk dengan Snort.
-    bash ~/snort/tools/log_hardware.sh > /dev/null &
+    bash log_hardware.sh > /dev/null &
     HW_LOG_PID=$!
     echo "Script Hardware aktif. File CSV otomatis dibuat oleh script Anda."
 else
@@ -46,7 +46,7 @@ trap cleanup SIGINT
 # Jalankan Snort
 sudo snort -c /usr/local/etc/snort/snort.lua \
 --talos -Q --daq afpacket -i enp0s3 \
---lua "snort_ml_engine = { http_param_model = '/usr/local/etc/snort/models/ae.tflite' }; \
+--lua "snort_ml_engine = { http_param_model = '/usr/local/etc/snort/models/mlp.tflite' }; \
 snort_ml = { http_param_threshold = 0.95 }; \
 trace = { modules = { snort_ml = {all = 1 } } };" \
 --lua "alert_fast = { file = false }" \

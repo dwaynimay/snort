@@ -44,11 +44,11 @@ echo "--- [3] Menjalankan Log Hardware (Foreground) ---"
 echo "Menunggu 2 detik agar tcpdump siap..."
 sleep 2
 
-if [ -f ~/snort/tools/log_hardware.sh ]; then
+if [ -f log_hardware.sh ]; then
     echo "Memulai logging hardware... Tekan Ctrl+C untuk berhenti."
     # JALANKAN DI FOREGROUND (Tanpa tanda &)
     # Output akan muncul langsung di terminal Anda karena script hardware Anda pakai 'tee'
-    bash ~/snort/tools/log_hardware.sh
+    bash log_hardware.sh
 else
     echo "Error: ~/snort/tools/log_hardware.sh tidak ditemukan!"
     kill $TCPDUMP_PID
