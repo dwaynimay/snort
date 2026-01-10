@@ -1,0 +1,264 @@
+01/09-02:56:25.719638 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-02:56:25.722494 [reset] [**] [116:414:1]  <enp0s3> "(ipv4) IPv4 packet to broadcast dest address" [**] [Priority: 3] {UDP} 0.0.0.0:68 -> 255.255.255.255:67
+01/09-02:56:25.722494 [reset] [**] [116:408:1]  <enp0s3> "(ipv4) IPv4 packet from 'current net' source address" [**] [Priority: 3] {UDP} 0.0.0.0:68 -> 255.255.255.255:67
+01/09-02:56:25.730202 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-02:56:25.986754 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-02:56:26.486497 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-02:56:26.552032 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-02:56:26.555094 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-02:56:26.986265 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-02:56:29.475675 [reset] [**] [4:63:1]  <enp0s3> "Portable Network Graphics file" [**] [Priority: 0] {TCP} 192.168.18.24:80 -> 192.168.18.236:49673
+01/09-02:56:29.670465 [reset] [**] [4:63:1]  <enp0s3> "Portable Network Graphics file" [**] [Priority: 0] {TCP} 192.168.18.24:80 -> 192.168.18.236:57416
+01/09-02:56:30.086469 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:53729 -> 2620:1ec:33::11:80
+01/09-02:56:30.532515 [reset] [**] [122:3:1]  <enp0s3> "(port_scan) TCP portsweep" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:64611 -> 2620:1ec:33::11:443
+01/09-02:57:00.347467 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-02:57:18.943559 [reset] [**] [4:63:1]  <enp0s3> "Portable Network Graphics file" [**] [Priority: 0] {TCP} 192.168.18.24:80 -> 192.168.18.236:58367
+01/09-02:57:30.052205 [reset] [**] [129:21:1]  <enp0s3> "(stream_tcp) TCP max queued reassembly bytes exceeded threshold" [**] [Priority: 3] {TCP} 91.189.91.100:443 -> 192.168.18.24:52780
+01/09-02:57:30.651843 [reset] [**] [129:15:1]  <enp0s3> "(stream_tcp) reset outside window" [**] [Priority: 3] {TCP} 2620:2d:4000:1010::2cc:443 -> 2404:8000:1005:1a6e:a00:27ff:fefd:a6c0:57246
+01/09-02:57:37.052610 [reset] [**] [129:21:1]  <enp0s3> "(stream_tcp) TCP max queued reassembly bytes exceeded threshold" [**] [Priority: 3] {TCP} 91.189.91.101:443 -> 192.168.18.24:36376
+01/09-02:57:40.242030 [reset] [**] [129:4:1]  <enp0s3> "(stream_tcp) TCP timestamp is outside of PAWS window" [**] [Priority: 3] {TCP} 91.189.91.100:443 -> 192.168.18.24:57222
+01/09-02:57:44.264842 [reset] [**] [129:15:1]  <enp0s3> "(stream_tcp) reset outside window" [**] [Priority: 3] {TCP} 2620:2d:4000:1010::2d6:443 -> 2404:8000:1005:1a6e:a00:27ff:fefd:a6c0:35648
+01/09-02:57:51.842695 [reset] [**] [129:15:1]  <enp0s3> "(stream_tcp) reset outside window" [**] [Priority: 3] {TCP} 2620:2d:4000:1010::42:443 -> 2404:8000:1005:1a6e:a00:27ff:fefd:a6c0:58142
+01/09-02:57:51.855683 [reset] [**] [122:3:1]  <enp0s3> "(port_scan) TCP portsweep" [**] [Priority: 3] {TCP} 2620:2d:4000:1010::42:443 -> 2404:8000:1005:1a6e:a00:27ff:fefd:a6c0:58142
+01/09-02:57:57.972853 [reset] [**] [129:15:1]  <enp0s3> "(stream_tcp) reset outside window" [**] [Priority: 3] {TCP} 2620:2d:4000:1010::42:443 -> 2404:8000:1005:1a6e:a00:27ff:fefd:a6c0:58158
+01/09-02:59:25.240195 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-02:59:27.078556 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-02:59:27.080846 [reset] [**] [116:414:1]  <enp0s3> "(ipv4) IPv4 packet to broadcast dest address" [**] [Priority: 3] {UDP} 0.0.0.0:68 -> 255.255.255.255:67
+01/09-02:59:27.080846 [reset] [**] [116:408:1]  <enp0s3> "(ipv4) IPv4 packet from 'current net' source address" [**] [Priority: 3] {UDP} 0.0.0.0:68 -> 255.255.255.255:67
+01/09-02:59:27.088978 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-02:59:27.486262 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-02:59:27.911328 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-02:59:27.914410 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-02:59:27.986650 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-02:59:35.559837 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-02:59:35.986415 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-02:59:36.561502 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-02:59:39.699512 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:55327 -> 192.168.18.24:80
+01/09-02:59:39.702690 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:61898 -> 192.168.18.24:80
+01/09-02:59:58.584398 [reset] [**] [4:63:1]  <enp0s3> "Portable Network Graphics file" [**] [Priority: 0] {TCP} 192.168.18.24:80 -> 192.168.18.236:63472
+01/09-03:00:17.033082 [reset] [**] [129:3:1]  <enp0s3> "(stream_tcp) data sent on stream not accepting data" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:50097 -> 2404:6800:4003:c04::bc:5228
+01/09-03:00:18.132316 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.49 -> 224.0.0.22
+01/09-03:00:18.540162 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.49 -> 224.0.0.22
+01/09-03:00:29.544517 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:00:39.421594 [reset] [**] [122:3:1]  <enp0s3> "(port_scan) TCP portsweep" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:64086 -> 2603:1061:2002:8120::d:443
+01/09-03:01:47.994213 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:64085 -> 192.168.18.24:80
+01/09-03:01:47.997235 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:53898 -> 192.168.18.24:80
+01/09-03:01:55.005570 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:02:25.173361 [reset] [**] [129:18:1]  <enp0s3> "(stream_tcp) data sent on stream after TCP reset received" [**] [Priority: 3] {TCP} 104.208.16.90:443 -> 192.168.18.236:53235
+01/09-03:02:57.544176 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:53233 -> 192.168.18.24:80
+01/09-03:02:57.546842 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:54419 -> 192.168.18.24:80
+01/09-03:02:59.004661 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:03:46.486030 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:03:55.486289 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:04:23.803586 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:64657 -> 192.168.18.24:80
+01/09-03:04:23.808696 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:56977 -> 192.168.18.24:80
+01/09-03:04:29.672204 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:04:51.986363 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:05:07.876801 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:05:09.886238 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:05:31.643050 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:53711 -> 192.168.18.24:80
+01/09-03:05:31.645885 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:55099 -> 192.168.18.24:80
+01/09-03:05:34.651327 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:05:46.485834 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:06:46.871088 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:06:46.899298 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:06:46.910456 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:06:46.912194 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:06:47.020306 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:06:47.511714 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:06:56.793935 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.13 -> 224.0.0.22
+01/09-03:07:01.234545 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.13 -> 224.0.0.22
+01/09-03:07:06.219969 [reset] [**] [122:23:1]  <enp0s3> "(port_scan) UDP filtered portsweep" [**] [Priority: 3] {UDP} 192.168.18.152:5353 -> 224.0.0.251:5353
+01/09-03:07:10.139386 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:07:40.461644 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:07:43.469182 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:07:46.485901 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:08:14.454346 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:09:46.986113 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:09:50.886578 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:55837 -> 192.168.18.24:80
+01/09-03:09:55.007880 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:10:26.491661 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:10:38.558308 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:51432 -> 192.168.18.24:80
+01/09-03:10:38.562239 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:56400 -> 192.168.18.24:80
+01/09-03:11:00.295807 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:11:02.616698 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:59671 -> 192.168.18.24:80
+01/09-03:11:02.619345 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:53087 -> 192.168.18.24:80
+01/09-03:12:01.731232 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:12:45.760644 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:13:17.244522 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:13:50.271232 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:14:54.427956 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:14:56.436418 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:15:40.861629 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:16:12.347418 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:16:19.272446 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:16:20.274935 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:16:46.398222 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:17:13.988436 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:17:49.988047 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:18:41.855248 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:19:13.599709 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:19:46.623252 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:19:49.988792 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:20:53.988157 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:20:55.148958 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:57875 -> 192.168.18.24:80
+01/09-03:20:55.152340 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:50403 -> 192.168.18.24:80
+01/09-03:21:32.242674 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:51888 -> 192.168.18.24:80
+01/09-03:21:32.247750 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:61054 -> 192.168.18.24:80
+01/09-03:21:47.195245 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:22:06.972176 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:58254 -> 192.168.18.24:80
+01/09-03:22:06.975352 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:50672 -> 192.168.18.24:80
+01/09-03:22:18.731264 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:22:43.747496 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:51241 -> 192.168.18.24:80
+01/09-03:22:43.750747 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:61922 -> 192.168.18.24:80
+01/09-03:22:50.943665 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:24:13.418678 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:24:16.428420 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:24:18.435031 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:62906 -> 192.168.18.24:80
+01/09-03:24:18.439345 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:63857 -> 192.168.18.24:80
+01/09-03:24:56.383254 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:25:05.989347 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:25:39.119491 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:25:42.122617 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:26:00.067112 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:61689 -> 192.168.18.24:80
+01/09-03:26:00.071635 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:63958 -> 192.168.18.24:80
+01/09-03:26:01.407211 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:26:06.777081 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:26:06.828285 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:26:06.840227 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:26:06.848319 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:26:07.019632 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:26:07.506869 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:26:13.489011 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:26:35.246050 [reset] [**] [122:23:1]  <enp0s3> "(port_scan) UDP filtered portsweep" [**] [Priority: 3] {UDP} 192.168.18.152:5353 -> 224.0.0.251:5353
+01/09-03:26:39.760223 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.13 -> 224.0.0.22
+01/09-03:26:44.170069 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.13 -> 224.0.0.22
+01/09-03:26:55.068760 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:49672 -> 192.168.18.24:80
+01/09-03:26:55.071668 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:50697 -> 192.168.18.24:80
+01/09-03:27:15.368248 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:27:15.408548 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:27:15.509378 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:27:16.018522 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:27:48.988864 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:28:07.100358 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:29:11.871252 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:29:37.208785 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-03:29:37.224226 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-03:29:37.225503 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-03:29:37.225503 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-03:29:37.489603 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.236 -> 224.0.0.22
+01/09-03:29:40.821150 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:59090 -> 192.168.18.24:80
+01/09-03:29:40.824410 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:53571 -> 192.168.18.24:80
+01/09-03:30:18.979191 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:62485 -> 192.168.18.24:80
+01/09-03:30:18.983373 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:52950 -> 192.168.18.24:80
+01/09-03:30:28.186933 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.49 -> 224.0.0.22
+01/09-03:30:28.541343 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.49 -> 224.0.0.22
+01/09-03:31:17.597380 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:32:08.662175 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:32:09.072980 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:32:10.632776 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:32:10.638055 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:32:10.638533 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:32:10.638533 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:32:10.638533 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:32:11.089026 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:32:14.489694 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:32:22.433744 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:33:00.309956 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:52461 -> 192.168.18.24:80
+01/09-03:33:00.313618 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:62717 -> 192.168.18.24:80
+01/09-03:33:02.639653 [reset] [**] [122:23:1]  <enp0s3> "(port_scan) UDP filtered portsweep" [**] [Priority: 3] {UDP} 192.168.18.152:54241 -> 239.255.255.250:1900
+01/09-03:33:37.595826 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:34:29.892256 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:35:01.308368 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:35:34.847835 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:36:02.487347 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:36:38.678235 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:62092 -> 192.168.18.24:80
+01/09-03:36:38.683716 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:50566 -> 192.168.18.24:80
+01/09-03:37:05.985555 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:57651 -> 192.168.18.24:80
+01/09-03:37:05.989663 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:54913 -> 192.168.18.24:80
+01/09-03:37:20.851130 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:65112 -> 192.168.18.24:80
+01/09-03:37:20.855450 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:61584 -> 192.168.18.24:80
+01/09-03:37:40.284899 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:38:11.808723 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:38:16.081179 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:54026 -> 192.168.18.24:80
+01/09-03:38:16.083838 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:58350 -> 192.168.18.24:80
+01/09-03:38:45.313295 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:39:44.739933 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:53660 -> 192.168.18.24:80
+01/09-03:39:44.744016 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:59563 -> 192.168.18.24:80
+01/09-03:39:58.227677 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.13 -> 224.0.0.22
+01/09-03:40:02.346510 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:61073 -> 192.168.18.24:80
+01/09-03:40:02.353171 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:60696 -> 192.168.18.24:80
+01/09-03:40:50.759323 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:41:27.117104 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:42:00.557291 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:42:18.991083 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:43:21.783680 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:60680 -> 192.168.18.24:80
+01/09-03:43:21.789184 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:62352 -> 192.168.18.24:80
+01/09-03:43:28.445343 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:43:36.049725 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:55455 -> 192.168.18.24:80
+01/09-03:43:36.051949 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:59916 -> 192.168.18.24:80
+01/09-03:43:43.519750 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:50671 -> 192.168.18.24:80
+01/09-03:43:43.522342 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:62620 -> 192.168.18.24:80
+01/09-03:44:05.308943 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:44:36.803959 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:44:42.392626 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:44:44.400452 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:44:47.739821 [reset] [**] [116:414:1]  <enp0s3> "(ipv4) IPv4 packet to broadcast dest address" [**] [Priority: 3] {UDP} 0.0.0.0:68 -> 255.255.255.255:67
+01/09-03:44:47.739821 [reset] [**] [116:408:1]  <enp0s3> "(ipv4) IPv4 packet from 'current net' source address" [**] [Priority: 3] {UDP} 0.0.0.0:68 -> 255.255.255.255:67
+01/09-03:44:47.890741 [reset] [**] [116:414:1]  <enp0s3> "(ipv4) IPv4 packet to broadcast dest address" [**] [Priority: 3] {UDP} 192.168.18.1:67 -> 255.255.255.255:68
+01/09-03:45:10.349275 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:45:20.439676 [reset] [**] [129:22:1]  <enp0s3> "(stream_tcp) TCP max queued reassembly segments exceeded threshold" [**] [Priority: 3] {TCP} 192.168.18.24:22 -> 192.168.18.236:62173
+01/09-03:45:39.889228 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:59488 -> 192.168.18.24:80
+01/09-03:45:39.891598 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:53924 -> 192.168.18.24:80
+01/09-03:46:16.033146 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:50157 -> 192.168.18.24:80
+01/09-03:46:16.036285 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:58784 -> 192.168.18.24:80
+01/09-03:47:16.027324 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:47:47.515236 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:47:52.527780 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:60055 -> 192.168.18.24:80
+01/09-03:47:52.531100 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:63291 -> 192.168.18.24:80
+01/09-03:48:20.796555 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:49:20.407558 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:57323 -> 2a04:4e42:7b::684:80
+01/09-03:49:20.434685 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:57324 -> 2a04:4e42:7b::684:80
+01/09-03:49:58.496622 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:58859 -> 2a04:4e42:7b::684:80
+01/09-03:49:58.524777 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:58860 -> 2a04:4e42:7b::684:80
+01/09-03:50:12.797403 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:57320 -> 192.168.18.24:80
+01/09-03:50:12.800188 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:55639 -> 192.168.18.24:80
+01/09-03:50:20.592396 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:53331 -> 2a04:4e42:7b::684:80
+01/09-03:50:20.619982 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:53332 -> 2a04:4e42:7b::684:80
+01/09-03:50:26.235347 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:50:57.723554 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:50:59.113495 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:53335 -> 2a04:4e42:7b::684:80
+01/09-03:50:59.139936 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:53336 -> 2a04:4e42:7b::684:80
+01/09-03:51:31.265001 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:52:01.753415 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:52:19.990855 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:53:05.316269 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:58556 -> 2a03:90c0:321:2803::252:80
+01/09-03:53:05.344163 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:58557 -> 2a03:90c0:321:2803::252:80
+01/09-03:53:10.584212 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:53330 -> 192.168.18.24:80
+01/09-03:53:10.588781 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:52557 -> 192.168.18.24:80
+01/09-03:53:36.699625 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:54:06.210751 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:53129 -> 2a04:4e42:7b::684:80
+01/09-03:54:06.238449 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:53130 -> 2a04:4e42:7b::684:80
+01/09-03:54:08.214644 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:54:59.691871 [reset] [**] [129:15:1]  <enp0s3> "(stream_tcp) reset outside window" [**] [Priority: 3] {TCP} 2603:1020:206:1::281:443 -> 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:53134
+01/09-03:55:21.098731 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:53138 -> 2a04:4e42:7b::684:80
+01/09-03:55:21.125848 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:53139 -> 2a04:4e42:7b::684:80
+01/09-03:55:28.128159 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:55:30.136860 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.206 -> 224.0.0.22
+01/09-03:55:59.926856 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:53143 -> 2a04:4e42:7b::684:80
+01/09-03:55:59.954892 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:53144 -> 2a04:4e42:7b::684:80
+01/09-03:56:10.880549 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:56:10.945159 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:56:10.946348 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:56:10.946348 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:56:11.016390 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:56:11.511229 [reset] [**] [116:444:1]  <enp0s3> "(ipv4) IPv4 option set" [**] [Priority: 3] {IP} 192.168.18.152 -> 224.0.0.22
+01/09-03:56:17.991524 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:56:28.662315 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:64457 -> 192.168.18.24:80
+01/09-03:56:28.667254 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 192.168.18.236:61019 -> 192.168.18.24:80
+01/09-03:56:47.195641 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:56:47.919664 [reset] [**] [411:1:1]  <enp0s3> "(snort_ml) potential threat found in HTTP parameters via Neural Network Based Exploit Detection" [**] [Priority: 3] {TCP} 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:62121 -> 2a04:4e42:7b::684:80
+01/09-03:56:58.721499 [reset] [**] [129:15:1]  <enp0s3> "(stream_tcp) reset outside window" [**] [Priority: 3] {TCP} 2603:1020:206:1::281:443 -> 2404:8000:1005:1a6e:2833:1f01:4ca4:825c:62123
+01/09-03:57:06.991710 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:57:07.991724 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 
+01/09-03:57:08.991644 [reset] [**] [112:1:1]  <enp0s3> "(arp_spoof) unicast ARP request" [**] [Priority: 3] {ARP}  -> 

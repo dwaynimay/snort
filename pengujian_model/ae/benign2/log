@@ -1,0 +1,669 @@
+snort@snort:~$ sudo snort \
+  -c /usr/local/etc/snort/snort.lua \
+  --talos \
+  -Q \
+  --daq afpacket \
+  -i enp0s3 \
+  --lua 'snort_ml_engine = { http_param_model = "/usr/local/etc/snort/models/ae.tflite" }' \
+  --lua 'snort_ml = { http_param_threshold = 0.5 }' \
+  --lua 'trace = { modules = { snort_ml = { all = 1 } } }' \
+  -A alert_fast \                        
+  -s 65535 \
+  -k none
+[sudo] password for snort: 
+--------------------------------------------------
+o")~   Snort++ 3.10.0.0
+--------------------------------------------------
+Loading /usr/local/etc/snort/snort.lua:
+Loading snort_defaults.lua:
+Finished snort_defaults.lua:
+Loading talos.lua:
+Finished talos.lua:
+        snort
+        ssh
+        snort_ml_engine
+        host_cache
+        pop
+        so_proxy
+        stream_tcp
+        cip
+        mms
+        smtp
+        dce_http_server
+        gtp_inspect
+        profiler
+        packets
+        dce_http_proxy
+        alert_talos
+        alert_fast
+        reject
+        ips
+        hosts
+        stream_icmp
+        binder
+        normalizer
+        wizard
+        appid
+        js_norm
+        file_id
+        http2_inspect
+        http_inspect
+        ftp_data
+        stream_udp
+        ftp_server
+        port_scan
+        search_engine
+        snort_ml
+        dce_tcp
+        dce_smb
+        iec104
+        telnet
+        ssl
+        sip
+        rpc_decode
+        netflow
+        modbus
+        host_tracker
+        stream_user
+        stream_ip
+        process
+        back_orifice
+        classifications
+        dnp3
+        opcua
+        active
+        trace
+        ftp_client
+        decode
+        alerts
+        stream
+        references
+        daq
+        arp_spoof
+        output
+        network
+        dns
+        dce_udp
+        imap
+        file_policy
+        s7commplus
+        stream_file
+Finished /usr/local/etc/snort/snort.lua:
+Loading file_id.rules_file:
+Loading file_magic.rules:
+Finished file_magic.rules:
+Finished file_id.rules_file:
+Loading ips.rules:
+Loading /usr/local/etc/snort/rules/local.rules:
+Finished /usr/local/etc/snort/rules/local.rules:
+Finished ips.rules:
+--------------------------------------------------
+ips policies rule stats
+              id  loaded  shared enabled    file
+               0     859       0     859    /usr/local/etc/snort/snort.lua
+--------------------------------------------------
+rule counts
+       total rules loaded: 859
+               text rules: 219
+            builtin rules: 640
+            option chains: 859
+            chain headers: 1
+--------------------------------------------------
+port rule counts
+             tcp     udp    icmp      ip
+     any     640       0       0       0
+   total     640       0       0       0
+--------------------------------------------------
+service rule counts          to-srv  to-cli
+                   dcerpc:      219     219
+                 ftp-data:      219     219
+                     http:      219     219
+                    http2:      219     219
+                    http3:      219     219
+                     imap:      219     219
+              netbios-ssn:      219     219
+                     pop3:      219     219
+                     smtp:      219     219
+                    total:     1971    1971
+--------------------------------------------------
+fast pattern groups
+                to_server: 9
+                to_client: 9
+--------------------------------------------------
+search engine (ac_bnfa)
+                instances: 18
+                 patterns: 3942
+            pattern chars: 23418
+               num states: 16488
+         num match states: 3528
+             memory scale: KB
+             total memory: 641.531
+           pattern memory: 176.836
+        match list memory: 255.938
+        transition memory: 206.508
+appid: MaxRss diff: 3412
+appid: patterns loaded: 300
+--------------------------------------------------
+afpacket DAQ configured to inline.
+Commencing packet processing
+Retry queue interval is: 200 ms
+++ [0] enp0s3
+P0:snort_ml:classifier:1: input (query): cup2key=2:-uFTK1FY0zEFQuIVUaaGXFof9YoJjzJnFhOJzoU4uZw&cup2hreq=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): df34e540a487d9c7
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): c1b00ff478396bc9
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 79f5631ce36f0bd6
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 694de667d1bba5c4
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 5a8c526ee15a757a
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 1d28a7aca0e7aa03
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 26cfbf904c28c798
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 11a2aaeaa4b33360
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): d4af221e1b608883
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 057b3914a9f71129
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 6bac74043d2da86d
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 18bdace7a8498820
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 682a2f8e6b7db6d3
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 756cf618f049fa02
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 54a301fd8b6f8ae1
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 0ca63e375e04c0df
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): page=include.php
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+P0:snort_ml:classifier:1: input (query): 7859b6b9f8dd5fdc
+P0:snort_ml:classifier:1: output: 1.000000
+P0:snort_ml:classifier:1: <ALERT>
+^C** caught int signal
+== stopping
+-- [0] enp0s3
+--------------------------------------------------
+Packet Statistics
+--------------------------------------------------
+daq
+                 received: 75971
+                 analyzed: 75968
+                  dropped: 16174
+                 injected: 349
+                    allow: 56605
+                    block: 57
+                  replace: 12
+                whitelist: 6887
+                blacklist: 12407
+                     idle: 577
+                 rx_bytes: 57568793
+--------------------------------------------------
+codec
+                    total: 75968        (100.000%)
+                      arp: 724          (  0.953%)
+                      eth: 75968        (100.000%)
+                    icmp4: 398          (  0.524%)
+                    icmp6: 2100         (  2.764%)
+                     igmp: 76           (  0.100%)
+                     ipv4: 56107        ( 73.856%)
+                     ipv6: 19137        ( 25.191%)
+            ipv6_hop_opts: 200          (  0.263%)
+                      tcp: 66766        ( 87.887%)
+                      udp: 5904         (  7.772%)
+--------------------------------------------------
+Module Statistics
+--------------------------------------------------
+ac_bnfa
+                 searches: 1373
+                  matches: 3151
+                    bytes: 6168369
+--------------------------------------------------
+ac_full
+                 searches: 9174
+                  matches: 24058
+                    bytes: 698254
+--------------------------------------------------
+active
+                  injects: 292
+--------------------------------------------------
+appid
+                  packets: 62952
+        processed_packets: 62099
+          ignored_packets: 853
+           total_sessions: 2444
+       service_cache_adds: 306
+             bytes_in_use: 51408
+             items_in_use: 306
+--------------------------------------------------
+arp_spoof
+                  packets: 724
+--------------------------------------------------
+back_orifice
+                  packets: 5619
+--------------------------------------------------
+binder
+              raw_packets: 1577
+                new_flows: 2044
+          service_changes: 310
+                 inspects: 3621
+--------------------------------------------------
+detection
+                 analyzed: 75968
+            file_searches: 1373
+                   alerts: 264
+             total_alerts: 264
+                   logged: 264
+--------------------------------------------------
+dns
+                  packets: 1406
+                 requests: 703
+                responses: 703
+             dns_over_udp: 1406
+--------------------------------------------------
+file_id
+              total_files: 913
+          total_file_data: 1265701
+     max_concurrent_files: 1
+--------------------------------------------------
+http_inspect
+                    flows: 116
+                    scans: 5298
+              reassembles: 5298
+              inspections: 5199
+                 requests: 998
+                responses: 915
+             get_requests: 998
+       uri_normalizations: 1
+  max_concurrent_sessions: 3
+              total_bytes: 7044013
+          compressed_gzip: 902
+--------------------------------------------------
+ips_actions
+                   reject: 264
+--------------------------------------------------
+normalizer
+        test_tcp_trim_win: 12
+             tcp_trim_win: 60
+        test_tcp_trim_mss: 942
+             tcp_ips_data: 24
+           test_tcp_block: 24
+--------------------------------------------------
+port_scan
+                  packets: 75244
+                 trackers: 256
+--------------------------------------------------
+search_engine
+               max_queued: 14
+            total_flushed: 2486
+            total_inserts: 3151
+             total_unique: 2486
+     non_qualified_events: 2482
+         qualified_events: 4
+--------------------------------------------------
+snort_ml
+               uri_alerts: 83
+                uri_bytes: 1439
+--------------------------------------------------
+snort_ml_engine
+              libml_calls: 83
+--------------------------------------------------
+ssl
+                  packets: 3626
+                  decoded: 3626
+             client_hello: 194
+             server_hello: 194
+              certificate: 24
+              server_done: 114
+      client_key_exchange: 24
+      server_key_exchange: 24
+            change_cipher: 385
+       client_application: 688
+       server_application: 2482
+     unrecognized_records: 26
+     handshakes_completed: 57
+         sessions_ignored: 58
+  max_concurrent_sessions: 90
+--------------------------------------------------
+stream
+                    flows: 2044
+             total_prunes: 1742
+idle_prunes_proto_timeout: 733
+            closed_prunes: 1009
+        ip_timeout_prunes: 17
+       tcp_timeout_prunes: 10
+       udp_timeout_prunes: 456
+      icmp_timeout_prunes: 250
+--------------------------------------------------
+stream_icmp
+                 sessions: 277
+                      max: 277
+                  created: 277
+                 released: 277
+--------------------------------------------------
+stream_ip
+                 sessions: 19
+                      max: 19
+                  created: 19
+                 released: 19
+              total_bytes: 320
+--------------------------------------------------
+stream_tcp
+                 sessions: 551
+                      max: 551
+                  created: 551
+                 released: 551
+                 timeouts: 21
+            stale_packets: 100
+             instantiated: 531
+                   setups: 551
+                 restarts: 310
+         discards_skipped: 24
+         invalid_seq_left: 57
+              invalid_ack: 15
+                   events: 12
+             syn_trackers: 517
+            data_trackers: 34
+              segs_queued: 29772
+            segs_released: 29772
+                segs_used: 20440
+          rebuilt_packets: 9226
+            rebuilt_bytes: 26059801
+                 overlaps: 24
+                     gaps: 1
+        exceeded_max_segs: 1
+       exceeded_max_bytes: 2
+    payload_fully_trimmed: 12
+          client_cleanups: 196
+          server_cleanups: 203
+                     syns: 641
+                 syn_acks: 590
+                     rsts: 98
+          rsts_ok_rfc5961: 87
+           rsts_in_window: 4
+             rsts_bad_seq: 6
+                     fins: 709
+                 max_segs: 3072
+                max_bytes: 4194304
+        keep_alive_probes: 235
+         full_retransmits: 4
+         asymmetric_flows: 4
+  max_bytes_exceeded_hole: 2
+   max_segs_exceeded_hole: 1
+--------------------------------------------------
+stream_udp
+                 sessions: 1197
+                      max: 1197
+                  created: 1596
+                 released: 1596
+                 timeouts: 399
+              total_bytes: 1520575
+--------------------------------------------------
+wizard
+                tcp_scans: 1060
+                 tcp_hits: 310
+                udp_scans: 494
+               udp_misses: 494
+--------------------------------------------------
+Appid Statistics
+--------------------------------------------------
+detected apps and services
+              Application: Services   Clients    Users      Payloads   Misc       Referred
+                  unknown: 1932       804        0          309        0          0
+--------------------------------------------------
+Summary Statistics
+--------------------------------------------------
+process
+                  signals: 1
+--------------------------------------------------
+timing
+                  runtime: 01:00:46
+                  seconds: 3646.872192
+                 pkts/sec: 1621
+                Mbits/sec: 10
+--------------------------------------------------
+rule profile (all, sorted by total_time)
+#       gid   sid rev    checks matches alerts time (us) avg/check avg/match avg/non-match timeouts suspends rule_time (%)
+=       ===   === ===    ====== ======= ====== ========= ========= ========= ============= ======== ======== =============
+1         4   218   1       896       0      0      8602         9         0             9        0        0       0.00024
+2         4   128   1       775       0      0      1180         1         0             1        0        0       0.00003
+3         4   112   1       415       0      0      1031         2         0             2        0        0       0.00003
+4         4    36   1        46       0      0       495        10         0            10        0        0       0.00001
+5         4     4   1       186       0      0       413         2         0             2        0        0       0.00001
+6         4    39   1        46       0      0       169         3         0             3        0        0       0.00000
+7         4   176   1        79       0      0       141         1         0             1        0        0       0.00000
+8         4   177   1        79       0      0       141         1         0             1        0        0       0.00000
+9         4   194   1        79       0      0       141         1         0             1        0        0       0.00000
+10        4   180   1        79       0      0       141         1         0             1        0        0       0.00000
+11        4   178   1        79       0      0       141         1         0             1        0        0       0.00000
+12        4   175   1        79       0      0       141         1         0             1        0        0       0.00000
+13        4   174   1        79       0      0       141         1         0             1        0        0       0.00000
+14        4   179   1        79       0      0       141         1         0             1        0        0       0.00000
+15        4    16   1         3       0      0        61        20         0            20        0        0       0.00000
+16        4   172   1        34       0      0        60         1         0             1        0        0       0.00000
+17        4   173   1        34       0      0        60         1            0.00000
+21        4   169   1        34       0      0        60         1         0             1        0        0       0.00000
+22        4   170   1        34       0      0        60         1         0             1        0        0       0.00000
+23        4   168   1        34       0      0        60         1         0             1        0        0       0.00000
+24        4    63   1         4       4      4        44        11        11             0        0        0       0.00000
+25        4    59   1         1       0      0         1         1         0             1        0        0       0.00000
+26        4   144   1         1       0      0         1         1         0             1        0        0       0.00000
+o")~   Snort exiting
+snort@snort:~$

@@ -4,11 +4,11 @@ from playwright.sync_api import sync_playwright
 
 # --- KONFIGURASI ---
 # Ganti dengan IP Target DVWA Anda
-TARGET_IP = "192.168.1.16"
+TARGET_IP = "192.168.18.24"
 BASE_URL = f"http://{TARGET_IP}/dvwa/login.php"
 USERNAME = "admin"
 PASSWORD = "password"
-
+RUN_DURATION = 60 * 60  # 1 jam
 max_actions = 30
 # Daftar Menu SESUAI GAMBAR YANG ANDA KIRIM
 # (Saya hapus 'Logout' agar bot tidak keluar sendiri)
@@ -35,7 +35,6 @@ MENU_ITEMS = [
     "Cryptography",
     "API",
     "DVWA Security",
-    "PHP Info",
     "About"
 ]
 
@@ -72,39 +71,69 @@ def run_benign_traffic():
             else:
                 print("[-] Login mungkin gagal, mencoba lanjut browsing...")
 
-            # --- TAHAP 2: BROWSING ACAK (LOOP) ---
+            # --- TAHAP 2: BROWSING ACAK BERDASARKAN WAKTU ---
+            start_time = time.time()
             action_count = 0
-            while True:
-                # Pilih satu menu secara acak dari daftar
-                if action_count >= max_actions:
-                    print(
-                        f"\n[DONE] Mencapai batas {max_actions} aksi. Selesai.")
-                    break
+
+            while time.time() - start_time < RUN_DURATION:
+                elapsed = int(time.time() - start_time)
+                remaining = int(RUN_DURATION - elapsed)
+
+                print(
+                    f"[TIME] Elapsed: {elapsed//60:02d}:{elapsed%60:02d} | "
+                    f"Remaining: {remaining//60:02d}:{remaining%60:02d}"
+                )
 
                 menu_text = random.choice(MENU_ITEMS)
 
                 try:
                     action_count += 1
-                    print(
-                        f"[{action_count}/{max_actions}] Mengklik menu: {menu_text}")
+                    print(f"[{action_count}] Mengklik menu: {menu_text}")
 
-                    # Playwright mencari tombol berdasarkan teks di sidebar
                     page.click(f"text={menu_text}", timeout=3000)
-
-                    # Tunggu loading selesai
                     page.wait_for_load_state('domcontentloaded')
-                    action_count += 1
 
-                    # --- JEDA WAKTU (PENTING UNTUK BENIGN) ---
-                    # Manusia membaca halaman sekitar 2 sampai 5 detik sebelum klik lagi
-                    sleep_sec = random.uniform(2.0, 5.0)
-                    time.sleep(sleep_sec)
+                    time.sleep(random.uniform(2.0, 5.0))
 
-                except Exception as e:
-                    # Kadang menu CSP Bypass / JavaScript Attacks membuka tab baru atau error
-                    print(f"[!] Gagal klik '{menu_text}'. Skip ke menu lain.")
-                    # Jika stuck, paksa kembali ke Home
+                except Exception:
+                    print(f"[!] Gagal klik '{menu_text}', kembali ke Home.")
                     page.goto(f"http://{TARGET_IP}/dvwa/index.php")
+
+            print("\n[DONE] Durasi 1 jam tercapai. Simulasi selesai.")
+
+            # # --- TAHAP 2: BROWSING ACAK (LOOP) ---
+            # action_count = 0
+            # while True:
+            #     # Pilih satu menu secara acak dari daftar
+            #     if action_count >= max_actions:
+            #         print(
+            #             f"\n[DONE] Mencapai batas {max_actions} aksi. Selesai.")
+            #         break
+
+            #     menu_text = random.choice(MENU_ITEMS)
+
+            #     try:
+            #         action_count += 1
+            #         print(
+            #             f"[{action_count}/{max_actions}] Mengklik menu: {menu_text}")
+
+            #         # Playwright mencari tombol berdasarkan teks di sidebar
+            #         page.click(f"text={menu_text}", timeout=3000)
+
+            #         # Tunggu loading selesai
+            #         page.wait_for_load_state('domcontentloaded')
+            #         action_count += 1
+
+            #         # --- JEDA WAKTU (PENTING UNTUK BENIGN) ---
+            #         # Manusia membaca halaman sekitar 2 sampai 5 detik sebelum klik lagi
+            #         sleep_sec = random.uniform(2.0, 5.0)
+            #         time.sleep(sleep_sec)
+
+            #     except Exception as e:
+            #         # Kadang menu CSP Bypass / JavaScript Attacks membuka tab baru atau error
+            #         print(f"[!] Gagal klik '{menu_text}'. Skip ke menu lain.")
+            #         # Jika stuck, paksa kembali ke Home
+            #         page.goto(f"http://{TARGET_IP}/dvwa/index.php")
 
         except KeyboardInterrupt:
             print("\n[!] Simulasi dihentikan oleh user (Ctrl+C).")
