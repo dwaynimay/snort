@@ -10,19 +10,11 @@ fi
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
 echo "--- [1] Mengatur VETH Pair & MTU 9000 ---"
-ip link delete veth0 2>/dev/null
-ip link delete veth1 2>/dev/null
-ip link add veth0 type veth peer name veth1
-ip link set veth0 mtu 9000
-ip link set veth1 mtu 9000
-ip link set veth0 up
-ip link set veth1 up
-ip link set veth0 promisc on
-ip link set veth1 promisc on
+#ip link set enp0s3 mtu 9000
 
 echo "--- [2] Menjalankan TCPDUMP (Background) ---"
 # Tcpdump tetap kita simpan ke file pcap untuk analisis Wireshark
-tcpdump -i veth1 -nn -w "log_packet_$TIMESTAMP.pcap" & 
+tcpdump -i enp0s3 -s 0 -nn "host 192.168.1.21 and host 192.168.1.18" -w "log_packet_$TIMESTAMP.pcap" &
 TCPDUMP_PID=$!
 
 echo "--- [3] Menjalankan Script Hardware Log Anda ---"
@@ -53,9 +45,9 @@ trap cleanup SIGINT
 
 # Jalankan Snort
 sudo snort -c /usr/local/etc/snort/snort.lua \
---talos -Q --daq afpacket -i veth1 \
+--talos -Q --daq afpacket -i enp0s3 \
 --lua "snort_ml_engine = { http_param_model = '/usr/local/etc/snort/models/ae.tflite' }; \
-snort_ml = { http_param_threshold = 0.5 }; \
+snort_ml = { http_param_threshold = 0.95 }; \
 trace = { modules = { snort_ml = {all = 1 } } };" \
 --lua "alert_fast = { file = false }" \
 -A alert_fast -s 65535 -k none
