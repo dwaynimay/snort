@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Pastikan script dijalankan sebagai root/sudo
+if [[ $EUID -ne 0 ]]; then
+   echo "Harap jalankan script ini dengan sudo!"
+   exit 1
+fi
+
+# Menggunakan satu timestamp dasar untuk folder atau penanda
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+
+echo "--- [1] Mengatur VETH Pair & MTU 9000 ---"
+ip link delete veth0 2>/dev/null
+ip link delete veth1 2>/dev/null
+ip link add veth0 type veth peer name veth1
+ip link set veth0 mtu 9000
+ip link set veth1 mtu 9000
+ip link set veth0 up
+ip link set veth1 up
+ip link set veth0 promisc on
+ip link set veth1 promisc on
+
+echo "--- [2] Menjalankan TCPDUMP (Background) ---"
+# Tcpdump tetap kita simpan ke file pcap untuk analisis Wireshark
+tcpdump -i veth1 -nn -w "log_packet_$TIMESTAMP.pcap" & 
+TCPDUMP_PID=$!
+
+echo "--- [3] Menjalankan Script Hardware Log Anda ---"
+if [ -f ~/snort/tools/log_hardware.sh ]; then
+    # Menjalankan script Anda. Karena script Anda sudah pakai 'tee' dan punya 
+    # nama file sendiri, kita jalankan saja di background.
+    # > /dev/null agar output terminal script hardware tidak menumpuk dengan Snort.
+    bash ~/snort/tools/log_hardware.sh > /dev/null &
+    HW_LOG_PID=$!
+    echo "Script Hardware aktif. File CSV otomatis dibuat oleh script Anda."
+else
+    echo "Peringatan: ~/snort/tools/log_hardware.sh TIDAK DITEMUKAN!"
+fi
+
+echo "--- [4] Menjalankan Snort 3 ML Engine ---"
+echo "Menunggu 3 detik agar semua logger siap..."
+sleep 3
+
+# Fungsi Cleanup saat Ctrl+C
+cleanup() {
+    echo -e "\n--- Menghentikan Pengujian ---"
+    kill $TCPDUMP_PID
+    [ ! -z "$HW_LOG_PID" ] && kill $HW_LOG_PID
+    echo "Selesai. Cek file PCAP dan file CSV Hardware Anda."
+    exit
+}
+trap cleanup SIGINT
+
+# Jalankan Snort
+sudo snort -c /usr/local/etc/snort/snort.lua \
+--talos -Q --daq afpacket -i veth1 \
+--lua "snort_ml_engine = { http_param_model = '/usr/local/etc/snort/models/ae.tflite' }; \
+snort_ml = { http_param_threshold = 0.5 }; \
+trace = { modules = { snort_ml = {all = 1 } } };" \
+--lua "alert_fast = { file = false }" \
+-A alert_fast -s 65535 -k none
