@@ -46,7 +46,7 @@ trap cleanup SIGINT
 # Jalankan Snort
 sudo snort -c /usr/local/etc/snort/snort.lua \
 --talos -Q --daq afpacket -i enp0s3 \
---lua "snort_ml_engine = { http_param_model = '/usr/local/etc/snort/models/mlp.tflite' }; \
+--lua "snort_ml_engine = { http_param_model = '/usr/local/etc/snort/models/ae.tflite' }; \
 snort_ml = { http_param_threshold = 0.95 }; \
 trace = { modules = { snort_ml = {all = 1 } } };" \
 --lua "alert_fast = { file = false }" \
